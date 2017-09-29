@@ -16,13 +16,13 @@ public class splashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
         final SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                String mail = sharedpreferences.getString("mail",null);
                 boolean verify = sharedpreferences.getBoolean("logged", false);
 
 

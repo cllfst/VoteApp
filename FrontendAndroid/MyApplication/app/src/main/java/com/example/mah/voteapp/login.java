@@ -72,12 +72,16 @@ public class login extends AppCompatActivity implements View.OnClickListener {
             else
             {
                 Toast.makeText(this,"Wrong password",Toast.LENGTH_LONG).show();
+                input_password.getText().clear();
                 return;
             }
         }
         else
         {
             Toast.makeText(this,"Email not found",Toast.LENGTH_LONG).show();
+            input_email.getText().clear();
+            input_password.getText().clear();
+
             return;
         }
     }
