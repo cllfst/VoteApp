@@ -17,32 +17,21 @@ public class splashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        final SharedPreferences sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                boolean verify = sharedpreferences.getBoolean("logged", false);
+
+                Intent splash = new Intent(splashScreen.this,cllfstlogo.class);
+                splash.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                splash.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(splash);
+                finish();
 
 
-                if (verify) {
-                    Log.d("!!!!!!!!!!!!!!", "sucess");
-                    Log.d("!!!!!!!!!!!!!!1", String.valueOf(verify));
-                    Intent main = new Intent(splashScreen.this,MainActivity.class);
-                    main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(main);
-                    finish();
 
-
-                } else {
-                    Log.d("!!!!!!!!!!!!!!", "signin");
-                    startActivity(new Intent(splashScreen.this, login.class));
-                    finish();
-                }
             }
-        }, 2000);
+        }, 3000);
     }
 
 
