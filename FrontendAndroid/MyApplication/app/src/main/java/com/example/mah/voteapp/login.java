@@ -47,12 +47,12 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         password1  = input_password.getText().toString().trim();
 
         if(TextUtils.isEmpty(email1)){
-            Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(TextUtils.isEmpty(password1)){
-            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter password",Toast.LENGTH_SHORT).show();
             return;
         }
         if(mail.equals(email1))
@@ -68,10 +68,12 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 editor.commit();
                 startActivity(main);
                 finish();
+                Toast.makeText(this,"Welcome",Toast.LENGTH_SHORT).show();
+
             }
             else
             {
-                Toast.makeText(this,"Wrong password",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"Wrong password",Toast.LENGTH_SHORT).show();
                 input_password.getText().clear();
                 return;
             }
