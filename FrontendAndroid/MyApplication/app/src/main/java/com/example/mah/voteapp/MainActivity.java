@@ -36,9 +36,6 @@ private Button logout ;
     }
 
 
-
-
-
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
@@ -53,7 +50,11 @@ private Button logout ;
                 finish();
                 Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
                 return true;
+            case R.id.settings:
+                Intent settings_intent = new Intent(MainActivity.this,settings.class);
+                startActivity(settings_intent);
 
+                return true;
         }
 
         return true;

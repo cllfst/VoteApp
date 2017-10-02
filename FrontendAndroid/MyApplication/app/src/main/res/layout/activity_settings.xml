@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_settings"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:title="Settings"
+        app:titleTextAppearance="@style/ToolbarTextAppearance.Title"
+        style="@style/MyToolbar"
+        />
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="50dp"
+    android:layout_marginBottom="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/MyHintSettings"
+        android:textColorHint="#1da8ff"
+        app:passwordToggleEnabled="true"
+
+        >
+
+        <EditText android:id="@+id/oldPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/FullWidthEditSettings"
+            android:inputType="textPassword"
+            android:textColor="#1da8ff"
+            android:textSize="50px"
+            android:hint="Current pass" />
+    </android.support.design.widget.TextInputLayout>
+</LinearLayout>
+
+    <!-- new pass Label -->
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginTop="8dp"
+android:layout_marginBottom="8dp">
+<android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:hintTextAppearance="@style/MyHintSettings"
+    app:passwordToggleEnabled="true"
+    android:textColorHint="#1da8ff"
+
+    >
+
+    <EditText android:id="@+id/newPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/FullWidthEditSettings"
+        android:inputType="textPassword"
+        android:textColor="#1da8ff"
+        android:textSize="50px"
+        android:hint="New pass"/>
+
+</android.support.design.widget.TextInputLayout>
+
+</LinearLayout>
+
+<Button
+android:id="@+id/btn_settings"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginTop="24dp"
+android:layout_marginBottom="24dp"
+android:layout_gravity="center"
+android:theme="@style/MyButtonSettings"
+android:text="Confirm"
+android:textColor="#fff"
+    />
+
+
+    </LinearLayout>

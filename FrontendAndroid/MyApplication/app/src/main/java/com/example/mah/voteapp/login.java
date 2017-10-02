@@ -35,7 +35,6 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         btn_login.setOnClickListener(this);
         input_email = (EditText) findViewById(R.id.input_email) ;
         input_password = (EditText) findViewById(R.id.input_password) ;
-        //checking if email and passwords are empty
 
     }
 

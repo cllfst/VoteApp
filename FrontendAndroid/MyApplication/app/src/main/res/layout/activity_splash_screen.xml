@@ -9,5 +9,5 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/nicesplash" />
+        android:background="@drawable/splashscreen4" />
 </LinearLayout>
