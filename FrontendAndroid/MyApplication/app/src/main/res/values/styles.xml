@@ -56,9 +56,10 @@
 
 
     <style name="MyToolbar">
-        <item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
         <item name="android:background">#1da8ff</item>
         <item name="android:elevation">4dp</item>
+        <item name="colorControlNormal">#FFF</item>
     </style>
 
 

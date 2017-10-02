@@ -11,6 +11,8 @@
         app:title="CLLVOTE"
         app:titleTextAppearance="@style/ToolbarTextAppearance.Title"
         style="@style/MyToolbar"
+        app:theme="@style/ThemeOverlay.AppCompat"
+
         />
 
 

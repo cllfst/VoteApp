@@ -24,10 +24,7 @@ public class splashScreen extends AppCompatActivity {
 
                 boolean verify = sharedpreferences.getBoolean("logged", false);
 
-
                 if (verify) {
-                    Log.d("!!!!!!!!!!!!!!", "sucess");
-                    Log.d("!!!!!!!!!!!!!!1", String.valueOf(verify));
                     Intent main = new Intent(splashScreen.this, MainActivity.class);
                     main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -36,7 +33,6 @@ public class splashScreen extends AppCompatActivity {
 
 
                 } else {
-                    Log.d("!!!!!!!!!!!!!!", "signin");
                     startActivity(new Intent(splashScreen.this, login.class));
                     finish();
                 }

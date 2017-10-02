@@ -63,6 +63,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("mail" , email1);
+                editor.putString("pass",password1);
                 editor.putBoolean("logged", true);
                 editor.commit();
                 startActivity(main);
