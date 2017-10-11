@@ -80,6 +80,7 @@ class OfferedAnswersController extends AppController
         $offeredAnswer = $this->OfferedAnswers->get($id, [
             'contain' => []
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $offeredAnswer = $this->OfferedAnswers->patchEntity($offeredAnswer, $this->request->getData());
             if ($this->OfferedAnswers->save($offeredAnswer)) {
@@ -89,6 +90,7 @@ class OfferedAnswersController extends AppController
             }
             $this->Flash->error(__('The offered answer could not be saved. Please, try again.'));
         }
+
         $questions = $this->OfferedAnswers->Questions->find('list', ['limit' => 200]);
         $this->set(compact('offeredAnswer', 'questions'));
         $this->set('_serialize', ['offeredAnswer']);
@@ -112,5 +114,28 @@ class OfferedAnswersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function vote($id = null) {
+
+        //TODO
+        //Test if user already vote
+
+        if (!$id) {
+            $id = $this->request->getParam('id');
+        }
+
+        $offeredAnswer = $this->OfferedAnswers->get($id, [
+            'contain' => []
+        ]);
+
+        $offeredAnswer->count = $offeredAnswer->count + 1;
+
+        if ($this->OfferedAnswers->save($offeredAnswer)) {
+            $vote = ["success" => true];
+        } else
+            $vote = ["success" => false];
+        $this->set(compact('vote','vote'));
+        $this->set('_serialize', ['vote']);
     }
 }

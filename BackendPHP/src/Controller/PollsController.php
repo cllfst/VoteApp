@@ -26,6 +26,12 @@ class PollsController extends AppController
         $this->set('_serialize', ['polls']);
     }
 
+//    public function random_password( $length = 8 ) {
+//        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
+//        $password = substr( str_shuffle( $chars ), 0, $length );
+//        return $password;
+//    }
+
     /**
      * View method
      *
@@ -33,8 +39,11 @@ class PollsController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($id = null )
     {
+        if (!$id) {
+            $id = $this->request->getParam('id');
+        }
         $poll = $this->Polls->get($id, [
             'contain' => ['Answers', 'Questions']
         ]);

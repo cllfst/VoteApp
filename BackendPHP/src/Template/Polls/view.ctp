@@ -46,18 +46,20 @@
         <?php if (!empty($poll->answers)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
+                <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('User Id') ?></th>
                 <th scope="col"><?= __('Poll Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($poll->answers as $answers): ?>
             <tr>
+                <td><?= h($answers->id) ?></td>
                 <td><?= h($answers->user_id) ?></td>
                 <td><?= h($answers->poll_id) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Answers', 'action' => 'view', $answers->user_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Answers', 'action' => 'edit', $answers->user_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Answers', 'action' => 'delete', $answers->user_id], ['confirm' => __('Are you sure you want to delete # {0}?', $answers->user_id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Answers', 'action' => 'view', $answers->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Answers', 'action' => 'edit', $answers->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Answers', 'action' => 'delete', $answers->id], ['confirm' => __('Are you sure you want to delete # {0}?', $answers->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

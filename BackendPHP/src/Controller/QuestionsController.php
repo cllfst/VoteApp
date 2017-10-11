@@ -38,6 +38,9 @@ class QuestionsController extends AppController
      */
     public function view($id = null)
     {
+        if (!$id) {
+            $id = $this->request->getParam('id');
+        }
         $question = $this->Questions->get($id, [
             'contain' => ['Polls', 'OfferedAnswers']
         ]);

@@ -33,7 +33,7 @@ class OfferedAnswersTable extends Table
         parent::initialize($config);
 
         $this->setTable('offered_answers');
-        $this->setDisplayField('answer_text');
+        $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Questions', [
