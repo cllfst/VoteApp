@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     android:background="#1da8ff"
+    android:id="@+id/myscroll"
     >
 
     <LinearLayout
@@ -41,8 +42,7 @@
                 android:theme="@style/FullWidthEditText"
                 android:inputType="textEmailAddress"
                 android:textColor="#FFF"
-
-                android:textSize="50px"
+                android:textSize="20dp"
                 android:hint="Email" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -68,7 +68,7 @@
                     android:theme="@style/FullWidthEditText"
                     android:inputType="textPassword"
                     android:textColor="#FFF"
-                    android:textSize="50px"
+                    android:textSize="20dp"
                     android:hint="Password"/>
 
             </android.support.design.widget.TextInputLayout>

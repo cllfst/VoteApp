@@ -14,7 +14,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".login"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".splashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -27,7 +28,9 @@
         <activity
             android:name=".settings"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".tab_test" />
+        <activity android:name=".vote"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
     </application>
 
 </manifest>

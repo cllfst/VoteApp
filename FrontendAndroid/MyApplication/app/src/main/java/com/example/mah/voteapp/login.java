@@ -7,9 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 
@@ -23,6 +26,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
     Button btn_login ;
     String email1 ;
     String password1 ;
+    ScrollView myscrollview;
     public static final String MyPREFERENCES = "MyPrefs" ;
 
 
@@ -35,6 +39,26 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         btn_login.setOnClickListener(this);
         input_email = (EditText) findViewById(R.id.input_email) ;
         input_password = (EditText) findViewById(R.id.input_password) ;
+        myscrollview = (ScrollView) findViewById(R.id.myscroll);
+
+        input_password.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                myscrollview.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        View lastChild = myscrollview.getChildAt(myscrollview.getChildCount() - 1);
+                        int bottom = lastChild.getBottom() + myscrollview.getPaddingBottom();
+                        int sy = myscrollview.getScrollY();
+                        int sh = myscrollview.getHeight();
+                        int delta = bottom - (sy + sh);
+                        myscrollview.smoothScrollBy(0, delta);
+                    }
+                }, 0);
+                return false;
+            }
+
+        });
 
     }
 
