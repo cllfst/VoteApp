@@ -1,0 +1,5 @@
+/BackendPHPBackendPHP/vendor/*
+/BackendPHP/tmp/*
+/BackendPHP/logs/*
+/BackendPHP/.idea
+/BackendPHP/.vscode
