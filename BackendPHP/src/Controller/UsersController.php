@@ -39,6 +39,8 @@ class UsersController extends AppController
             'contain' => ['Answers']
         ]);
 
+        $this->sendMail($user,"Hello");
+
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
     }
@@ -53,10 +55,15 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+
+            $password = $this->random_password(10);
+            
+            $user->password = $password;
+            var_dump($password);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                //return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -108,4 +115,24 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+    public function random_password( $length = 8 ) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
+        $password = substr( str_shuffle( $chars ), 0, $length );
+        return $password;
+    }
+
+
+    protected function sendMail($userData, $subject, $template = 'default', $layout = 'default',$action) {
+        $email = new Email('default');
+        $email
+            ->template($template,$layout)
+            ->emailFormat('html')
+            ->to($userData->email)
+            ->viewVars([$userData->password])
+            ->subject($subject)
+            ->send();
+    }
+
 }

@@ -49,10 +49,10 @@ Router::scope('/', function (RouteBuilder $routes) {
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-    $routes->connect('/getPollsList',['controller' => 'Polls', 'action' => 'index']);
-    $routes->connect('/getPollQuestions/:id',['controller' => 'Polls', 'action' => 'view']);
-    $routes->connect('/getQuestionChoices/:id',['controller' => 'Questions', 'action' => 'view']);
-    $routes->connect('/vote/:id',['controller' => 'OfferedAnswers', 'action' => 'vote']);
+    $routes->connect('/api/getPollsList',['controller' => 'Polls', 'action' => 'index']);
+    $routes->connect('/api/getPollQuestions/:id',['controller' => 'Polls', 'action' => 'view']);
+    $routes->connect('/api/getQuestionChoices/:id',['controller' => 'Questions', 'action' => 'view']);
+    $routes->connect('/api/vote/:id',['controller' => 'OfferedAnswers', 'action' => 'vote']);
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */

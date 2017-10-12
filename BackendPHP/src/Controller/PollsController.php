@@ -20,27 +20,24 @@ class PollsController extends AppController
      */
     public function index()
     {
+        $this->request->allowMethod(['get']);
         $polls = $this->paginate($this->Polls);
 
         $this->set(compact('polls'));
         $this->set('_serialize', ['polls']);
     }
 
-//    public function random_password( $length = 8 ) {
-//        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
-//        $password = substr( str_shuffle( $chars ), 0, $length );
-//        return $password;
-//    }
-
     /**
      * View method
-     *
+     *    $this->request->allowMethod(['post', 'delete']);
+
      * @param string|null $id Poll id.
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null )
     {
+        $this->request->allowMethod(['get']);
         if (!$id) {
             $id = $this->request->getParam('id');
         }

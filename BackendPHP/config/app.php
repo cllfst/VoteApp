@@ -176,6 +176,21 @@ return [
      * appropriate file to src/Mailer/Transport. Transports should be named
      * 'YourTransport.php', where 'Your' is the name of the transport.
      */
+    /*'EmailTransport' => [
+        'default' => [
+            'className' => 'Mail',
+            // The following keys are used in SMTP transports
+            'host' => 'localhost',
+            'port' => 25,
+            'timeout' => 30,
+            'username' => 'user',
+            'password' => 'secret',
+            'client' => null,
+            'tls' => null,
+            'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
+        ],
+    ],*/
+
     'EmailTransport' => [
         'default' => [
             'className' => 'Mail',
@@ -189,6 +204,18 @@ return [
             'tls' => null,
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
+
+        'dev' => [
+            'className' => 'Smtp',
+            // The following keys are used in SMTP transports
+            'host' => 'mailtrap.io',
+            'port' => 2525,
+            'timeout' => 30,
+            'username' => '94c7b9d48c5daa',
+            'password' => 'caf52b1ab80fc5',
+            'client' => null,
+            'tls' => null
+        ]
     ],
 
     /**
