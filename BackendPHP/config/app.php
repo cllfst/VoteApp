@@ -229,8 +229,8 @@ return [
      */
     'Email' => [
         'default' => [
-            'transport' => 'default',
-            'from' => 'you@localhost',
+            'transport' => 'dev',
+            'from' => 'no-reply@pol.ls',
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
         ],

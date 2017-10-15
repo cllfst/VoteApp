@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\Answer;
 
 /**
  * OfferedAnswers Controller
@@ -20,6 +21,7 @@ class OfferedAnswersController extends AppController
      */
     public function index()
     {
+
         $this->paginate = [
             'contain' => ['Questions']
         ];
@@ -116,26 +118,109 @@ class OfferedAnswersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function vote($id = null) {
+    public function didVote($poll_id) {
 
-        //TODO
-        //Test if user already vote
+        $user_id = $this->Auth->user('id');
+        $Answer = $this->loadModel('Answers');
+
+        $voteCount = $Answer->find()
+            ->select()
+            ->where(['user_id' => $user_id,'poll_id' => $poll_id])
+            ->count();
+
+        if ($voteCount > 0) {
+            return true;
+        } else
+            return false;
+
+    }
+
+    public function didVoteAPI($poll_id = null) {
+
+        if (!$poll_id) {
+            $poll_id = $this->request->getParam('id');
+        }
+
+        if ($this->didVote($poll_id)) {
+            $response = [
+                'didVote' => true
+            ];
+        } else
+            $response = [
+                'didVote' => false
+            ];
+
+        $this->set(compact('response',$response));
+        $this->set('_serialize', ['response']);
+    }
+
+    public function votedOnPoll($poll_id = null) {
+
+        if (!$poll_id) {
+            $poll_id = $this->request->getParam('id');
+        }
+
+        $Answers = $this->loadModel('Answers');
+
+        $entity = $Answers->newEntity();
+
+        $data = [
+            'poll_id'=> $poll_id,
+            'user_id' => $this->Auth->user('id')
+        ];
+
+        $entity = $Answers->patchEntity($entity,$data);
+
+        if ($Answers->save($entity)) {
+            $response = ['success' => true];
+        } else
+            $response = ['success' => false];
+
+        $this->set(compact('response',$response));
+        $this->set('_serialize', ['response']);
+
+    }
+
+    public function vote($id = null) {
 
         if (!$id) {
             $id = $this->request->getParam('id');
         }
 
-        $offeredAnswer = $this->OfferedAnswers->get($id, [
-            'contain' => []
-        ]);
+        $offeredAnswer = $this->OfferedAnswers->get($id);
 
-        $offeredAnswer->count = $offeredAnswer->count + 1;
 
-        if ($this->OfferedAnswers->save($offeredAnswer)) {
-            $vote = ["success" => true];
-        } else
-            $vote = ["success" => false];
-        $this->set(compact('vote','vote'));
-        $this->set('_serialize', ['vote']);
+        $Polls = $this->loadModel('questions');
+        $poll_id = $Polls->find()
+            ->select('poll_id')
+            ->where(['id' => $offeredAnswer->question_id])
+            ->first()['poll_id'];
+
+
+       if (!$this->didVote($poll_id)) {
+
+           $offeredAnswer = $this->OfferedAnswers->get($id, [
+               'contain' => []
+           ]);
+
+           $offeredAnswer->count = $offeredAnswer->count + 1;
+
+           if ($this->OfferedAnswers->save($offeredAnswer)) {
+
+               $this->votedOnPoll($poll_id);
+
+               $response = ["success" => true];
+           } else
+               $response = ["success" => false];
+
+       } else
+           $response = [
+               "success" => false,
+               "error" => "Did vote already"
+           ];
+
+
+        $this->set(compact('response',$response));
+        $this->set('_serialize', ['response']);
     }
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 12, 2017 at 01:54 AM
+-- Generation Time: Oct 15, 2017 at 10:01 PM
 -- Server version: 5.7.19-0ubuntu0.16.04.1
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -37,8 +37,7 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`id`, `user_id`, `poll_id`) VALUES
-('341f5b5f-b835-4453-86ee-0d9b9aa88984', '7fc03104-3875-45c1-8aaa-c3f62ffec0e3', 'f8d6f52b-8880-45b3-8db0-da425b20f4d9'),
-('e11b5bc8-2a83-4fcb-8f40-d92435083cb3', '7fc03104-3875-45c1-8aaa-c3f62ffec0e3', '30880f19-cd85-43e2-aa40-fe29a304a0cb');
+('7c321530-836a-48ae-9a43-152c06464902', 'f395f557-b7e0-44be-be26-67a519dd2bc6', '30880f19-cd85-43e2-aa40-fe29a304a0cb');
 
 -- --------------------------------------------------------
 
@@ -58,7 +57,7 @@ CREATE TABLE `offered_answers` (
 --
 
 INSERT INTO `offered_answers` (`id`, `answer_text`, `count`, `question_id`) VALUES
-('04795476-84a5-4b18-abfb-bebef1d91c22', 'CA', 0, '89b83179-7c85-445f-a835-3be529f114f1'),
+('04795476-84a5-4b18-abfb-bebef1d91c22', 'CA', 15, '89b83179-7c85-445f-a835-3be529f114f1'),
 ('5c812729-cc55-45a2-ba1b-8c304c3e3baa', 'MT', 0, '89b83179-7c85-445f-a835-3be529f114f1'),
 ('aef75c0a-afce-4e52-a31e-d57b6a3a2b8e', 'RR', 0, '64b90327-dfbc-4c44-b3b9-5b08bac71faa'),
 ('d872ff3c-f2be-44b2-8857-05ad97c854f0', 'KN', 0, '64b90327-dfbc-4c44-b3b9-5b08bac71faa');
@@ -123,7 +122,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`) VALUES
-('7fc03104-3875-45c1-8aaa-c3f62ffec0e3', 'Chebbi', 'Aymen', 'aymen.chebi@gmail.com', 'root');
+('bb8b412a-bb51-4966-bde8-933b737d92df', 'Mahmoud', 'Turki', 'mahmoud@tur.ki', '$2y$10$lvkWCaGaDqWdpVERPufDYODBCFEtOqwvTNYQQf/n85W.EFsxr20Oy'),
+('f395f557-b7e0-44be-be26-67a519dd2bc6', 'Aymen', 'Chebbi', 'aymen.chebi@gmail.com', '$2y$10$hQNhw1EzO7CJOnsabKq1h.gXpeqTfLnBH4CoUiFkitecsgu3rtOF6');
 
 --
 -- Indexes for dumped tables

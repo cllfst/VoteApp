@@ -1,4 +1,4 @@
-# CakePHP Application Skeleton
+# Vote App CakePHP Backend
 
 [![Build Status](https://img.shields.io/travis/cakephp/app/master.svg?style=flat-square)](https://travis-ci.org/cakephp/app)
 [![License](https://img.shields.io/packagist/l/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
@@ -118,8 +118,91 @@ response : 200 (json) : successful vote
 response : 200 (json) : user already voted
 ```json
 {
-    "vote": {
-        "success": false
+    "response": {
+        "success": false,
+        "error": "Did vote already"
     }
 }
 ```
+`GET` /api/didVote/{offered_answer_id} : increment an offered_answer vote count by one.
+
+response : 200 (json) : successful vote
+
+```json
+{
+    "vote": {
+        "success": true
+    }
+}
+```
+`POST` /api/login : login a user
+
+body request
+
+```json
+{
+	"email":"vote@polls.com",
+	"password":"polls"
+}
+```
+
+response : 200 (json) : successful login
+
+```json
+{
+    "response": {
+        "login": "success"
+    }
+}
+```
+
+response : 200 (json) : unsuccessful login
+
+```json
+{
+    "response": {
+        "login": "failed"
+    }
+}
+```
+
+`GET` /api/logout : logout a user
+
+response : 200 (json) 
+
+```json
+{
+    "response": [
+        "logged out successful"
+    ]
+}
+```
+`POST` /api/updatePassword : change current logged user password
+
+body request
+```json
+{
+	"current_password":"root",
+	"password":"rotrot"
+}
+```
+
+response : 200 (json) : password changed successfully
+
+```json
+{
+    "response": {
+        "success": "true"
+    }
+}
+```
+
+response : 200 (json) : incorrect current password
+```json
+{
+    "response": {
+        "success": "false",
+        "error": "current password is incorrect"
+    }
+}
+``` 

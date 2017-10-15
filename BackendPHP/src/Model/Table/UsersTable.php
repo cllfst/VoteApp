@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -75,6 +76,7 @@ class UsersTable extends Table
 
         return $validator;
     }
+
 
     /**
      * Returns a rules checker object that will be used for validating
