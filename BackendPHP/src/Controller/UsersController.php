@@ -2,6 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\Event\Event;
+use Cake\Mailer\Email;
 
 /**
  * Users Controller
@@ -22,6 +25,7 @@ class UsersController extends AppController
     {
         $users = $this->paginate($this->Users);
 
+
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }
@@ -39,8 +43,6 @@ class UsersController extends AppController
             'contain' => ['Answers']
         ]);
 
-        $this->sendMail($user,"Hello");
-
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
     }
@@ -57,13 +59,14 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->getData());
 
             $password = $this->random_password(10);
-            
             $user->password = $password;
             var_dump($password);
             if ($this->Users->save($user)) {
+
+                $this->sendMail($user->email,['user'=> $user, 'password' => $password ],"Hello",'welcome');
                 $this->Flash->success(__('The user has been saved.'));
 
-                //return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -83,7 +86,7 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
+        if ($this->request->is(['put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
@@ -124,15 +127,82 @@ class UsersController extends AppController
     }
 
 
-    protected function sendMail($userData, $subject, $template = 'default', $layout = 'default',$action) {
+    protected function sendMail($toMail,$vars, $subject, $template = 'default', $layout = 'default') {
         $email = new Email('default');
         $email
             ->template($template,$layout)
             ->emailFormat('html')
-            ->to($userData->email)
-            ->viewVars([$userData->password])
+            ->to($toMail)
+            ->viewVars(['vars' => $vars])
             ->subject($subject)
             ->send();
+    }
+
+    public function login() {
+
+        $response = [];
+        if ($this->request->is('post')) {
+
+            if ($this->Auth->identify()) {
+                $this->Auth->setUser($this->Auth->identify());
+
+                $response = ['login' => 'success'];
+
+            } else {
+                $response = ['login' => 'failed'];
+            }
+        }
+
+        $this->set(compact('response',$response));
+        $this->set('_serialize',['response']);
+
+    }
+
+    public function logout() {
+
+        $response = ["logged out successful"];
+        $this->set(compact("response",$response));
+        $this->set('_serialize',['response']);
+
+    }
+
+    public function beforeFilter(Event $event) {
+
+        $this->Auth->allow(['logout']);
+
+    }
+
+    public function updatePassword() {
+
+        $id = $this->Auth->user('id');
+        $user = $this->Users->get($id, [
+            'contain' => ['Answers']
+        ]);
+        $response = [];
+
+        if ($this->request->is('put')) {
+            $current_password = $this->request->getData('current_password');
+            if ((new DefaultPasswordHasher())->check($current_password,$user->password)) {
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                if ($this->Users->save($user)) {
+                    $response = ["success" => 'true'];
+                } else {
+                    $response = [
+                      "errors" => $user->getErrors()
+                    ];
+                }
+            } else {
+                $response = [
+                    "success" => 'false',
+                    "error" => "current password is incorrect"
+                ];
+            }
+        }
+
+
+        $this->set(compact("response",$response));
+        $this->set('_serialize',['response']);
+
     }
 
 }
