@@ -176,6 +176,37 @@ response : 200 (json) : unsuccessful login
     }
 }
 ```
+   
+`POST` /api/login : login a user
+
+body request
+
+```json
+{
+	"email":"vote@polls.com",
+	"password":"polls"
+}
+```
+
+response : 200 (json) : successful login
+
+```json
+{
+    "response": {
+        "login": "success"
+    }
+}
+```
+
+response : 200 (json) : unsuccessful login
+
+```json
+{
+    "response": {
+        "login": "failed"
+    }
+}
+```
 
 `GET` /api/logout : logout a user
 
