@@ -167,6 +167,49 @@ response : 200 (json) : successful login
 }
 ```
 
+response : 200 (json) : Email does not exist
+
+```json
+{
+    "response": {
+        "login": "failed",
+        "error": "Email does not exist"
+    }
+}
+```
+
+response : 200 (json) : Email does not exist
+
+```json
+{
+    "response": {
+        "login": "failed",
+        "Error": "Incorrect credentials"
+    }
+}
+```
+   
+`POST` /api/login : login a user
+
+body request
+
+```json
+{
+	"email":"vote@polls.com",
+	"password":"polls"
+}
+```
+
+response : 200 (json) : successful login
+
+```json
+{
+    "response": {
+        "login": "success"
+    }
+}
+```
+
 response : 200 (json) : unsuccessful login
 
 ```json

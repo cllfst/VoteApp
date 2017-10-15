@@ -143,13 +143,30 @@ class UsersController extends AppController
         $response = [];
         if ($this->request->is('post')) {
 
-            if ($this->Auth->identify()) {
-                $this->Auth->setUser($this->Auth->identify());
+            $userExist = $this->Users->find()
+                ->select("email")
+                ->where(['email' => $this->request->getData('email')])
+                ->count();
 
-                $response = ['login' => 'success'];
+            if ($userExist == 0 ) {
+                $response = [
+                    'login' => 'failed',
+                    'error' => 'Email does not exist'
+                ];
 
             } else {
-                $response = ['login' => 'failed'];
+
+                if ($this->Auth->identify()) {
+                    $this->Auth->setUser($this->Auth->identify());
+
+                    $response = ['login' => 'success'];
+
+                } else {
+                    $response = [
+                        'login' => 'failed',
+                        'Error' => 'Incorrect credentials'
+                    ];
+                }
             }
         }
 
@@ -188,7 +205,7 @@ class UsersController extends AppController
                     $response = ["success" => 'true'];
                 } else {
                     $response = [
-                      "errors" => $user->getErrors()
+                        "errors" => $user->getErrors()
                     ];
                 }
             } else {
