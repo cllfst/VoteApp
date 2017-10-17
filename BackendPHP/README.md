@@ -17,18 +17,18 @@ dependencies.
 Read and edit `config/app.php` and setup `'username'`, `'password'` and `'database'` in `'Datasources'` according to your MySQL configuration
 
 ```php
-'Datasources' => [
-        'default' => [
-            'username' => 'root',
-            'password' => 'root',
-            'database' => 'pollsapp',
+'Datasources' : [
+        'default' : [
+            'username' : 'root',
+            'password' : 'root',
+            'database' : 'pollsapp',
         ]
 ]           
 ```
 
 ## APIs
 
-Use postman to test/simulate APIs
+Use postman to test/simulate APIs.
 
 `GET` /api/getPollsList : returns a list of polls.
 
@@ -122,7 +122,8 @@ response : 200 (json) : successful vote
 ```json
 {
     "vote": {
-        "success": true
+        "code" : 0,
+        "message" : "Voted successfully"
     }
 }
 ```
@@ -130,22 +131,34 @@ response : 200 (json) : user already voted
 ```json
 {
     "response": {
-        "success": false,
-        "error": "Did vote already"
+        "code" : -2,
+        "message" : "Did vote already"
     }
 }
 ```
 `GET` /api/didVote/{offered_answer_id} : increment an offered_answer vote count by one.
-
-response : 200 (json) : successful vote
+    
+response : 200 (json) : Did already vote
 
 ```json
 {
     "vote": {
-        "success": true
+        "code" : -1,
+        "message" : "Did vote already"
     }
 }
 ```
+
+response : 200 (json) : Didn't vote
+```json
+{
+    "vote": {
+        "code" : 0,
+        "message" : "didn't vote"
+    }
+}
+```
+
 `POST` /api/login : login a user
 
 body request
@@ -162,7 +175,19 @@ response : 200 (json) : successful login
 ```json
 {
     "response": {
-        "login": "success"
+        "code" : 0,
+        "message" : "logged in successfully"
+    }
+}
+```
+
+response : 200 (json) : Not logged (Any request)
+
+```json
+{
+    "response": {
+        "code" : -1,
+        "message" : "You are not connected"
     }
 }
 ```
@@ -172,8 +197,8 @@ response : 200 (json) : Email does not exist
 ```json
 {
     "response": {
-        "login": "failed",
-        "error": "Email does not exist"
+        "code" : -2,
+        "message" : "Email does not exist"
     }
 }
 ```
@@ -183,8 +208,8 @@ response : 200 (json) : Incorrect credentials
 ```json
 {
     "response": {
-        "login": "failed",
-        "Error": "Incorrect credentials"
+        "code" : -3,
+        "message" : "Incorrect credentials"
     }
 }
 ```
@@ -195,9 +220,10 @@ response : 200 (json)
 
 ```json
 {
-    "response": [
-        "logged out successful"
-    ]
+    "response": {
+        "code" : 0,
+        "message" : "logged out successful"
+    }
 }
 ```
 `POST` /api/updatePassword : change current logged user password
@@ -211,11 +237,21 @@ body request
 ```
 
 response : 200 (json) : password changed successfully
-
 ```json
 {
     "response": {
-        "success": "true"
+        "code" : 0,
+        "message" : "Password updated successfully"    
+    }
+}
+```
+
+response : 200 (json) : Password update error
+```json
+{
+    "response": {
+        "code" : -1,
+        "message" : "Couldn't update password"    
     }
 }
 ```
@@ -224,8 +260,8 @@ response : 200 (json) : incorrect current password
 ```json
 {
     "response": {
-        "success": "false",
-        "error": "current password is incorrect"
+        "code" : -2,
+        "message" : "Current password is incorrect"
     }
 }
 ``` 

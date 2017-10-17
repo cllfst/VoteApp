@@ -222,8 +222,8 @@ class OfferedAnswersController extends AppController
 
         } else
             $response = [
-                "success" => false,
-                "error" => "Did vote already"
+                "code" => -2,
+                "message" => "Did vote already"
             ];
 
 
