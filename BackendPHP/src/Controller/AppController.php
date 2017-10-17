@@ -51,7 +51,9 @@ class AppController extends Controller
                         'password' => 'password'
                     ]
                 ]
-            ]
+            ],
+            'loginError' => "Invalid Credentials",
+            'authError' => 'you are authorized to access this'
         ]);
 
         /*

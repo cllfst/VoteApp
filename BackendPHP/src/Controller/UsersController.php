@@ -140,7 +140,10 @@ class UsersController extends AppController
 
     public function login() {
 
-        $response = [];
+        $response = [
+            "code" => -1,
+            "message" => "You are not connected"
+        ];
         if ($this->request->is('post')) {
 
             $userExist = $this->Users->find()
@@ -150,8 +153,8 @@ class UsersController extends AppController
 
             if ($userExist == 0 ) {
                 $response = [
-                    'login' => 'failed',
-                    'error' => 'Email does not exist'
+                    'code' => -2,
+                    'message' => 'Email does not exist'
                 ];
 
             } else {
@@ -159,12 +162,15 @@ class UsersController extends AppController
                 if ($this->Auth->identify()) {
                     $this->Auth->setUser($this->Auth->identify());
 
-                    $response = ['login' => 'success'];
+                    $response = [
+                        'code' => 0,
+                        'message' => 'logged in successfully'
+                    ];
 
                 } else {
                     $response = [
-                        'login' => 'failed',
-                        'Error' => 'Incorrect credentials'
+                        'code' => -3,
+                        'message' => 'Incorrect credentials'
                     ];
                 }
             }
@@ -177,17 +183,21 @@ class UsersController extends AppController
 
     public function logout() {
 
-        $response = ["logged out successful"];
+        $this->Auth->logout();
+        $response = [
+            "code" => 0,
+            "message" => "logged out successful"
+        ];
         $this->set(compact("response",$response));
         $this->set('_serialize',['response']);
 
     }
 
-    public function beforeFilter(Event $event) {
-
-        $this->Auth->allow(['logout']);
-
-    }
+//    public function beforeFilter(Event $event) {
+//
+//        $this->Auth->allow(['logout']);
+//
+//    }
 
     public function updatePassword() {
 
@@ -195,23 +205,29 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => ['Answers']
         ]);
-        $response = [];
+        $response = [
+            "code" => 0,
+            "message" => "Shit"];
 
         if ($this->request->is('put')) {
             $current_password = $this->request->getData('current_password');
             if ((new DefaultPasswordHasher())->check($current_password,$user->password)) {
                 $user = $this->Users->patchEntity($user, $this->request->getData());
                 if ($this->Users->save($user)) {
-                    $response = ["success" => 'true'];
+                    $response = [
+                        "code" => 0,
+                        "message" => "Password updated successfully"
+                    ];
                 } else {
                     $response = [
-                        "errors" => $user->getErrors()
+                        "code" => -1,
+                        "message" => "Couldn\'t update password"
                     ];
                 }
             } else {
                 $response = [
-                    "success" => 'false',
-                    "error" => "current password is incorrect"
+                    "code" => -2,
+                    "message" => "Current password is incorrect"
                 ];
             }
         }

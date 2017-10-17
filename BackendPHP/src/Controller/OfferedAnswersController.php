@@ -143,11 +143,13 @@ class OfferedAnswersController extends AppController
 
         if ($this->didVote($poll_id)) {
             $response = [
-                'didVote' => true
+                "code" => -1,
+                'message' => "Did vote already"
             ];
         } else
             $response = [
-                'didVote' => false
+                "code" => 0,
+                'message' => 'didn\'t vote'
             ];
 
         $this->set(compact('response',$response));
@@ -172,12 +174,12 @@ class OfferedAnswersController extends AppController
         $entity = $Answers->patchEntity($entity,$data);
 
         if ($Answers->save($entity)) {
-            $response = ['success' => true];
+            return true;
         } else
-            $response = ['success' => false];
+            return false;
 
-        $this->set(compact('response',$response));
-        $this->set('_serialize', ['response']);
+//        $this->set(compact('response',$response));
+//        $this->set('_serialize', ['response']);
 
     }
 
@@ -197,27 +199,32 @@ class OfferedAnswersController extends AppController
             ->first()['poll_id'];
 
 
-       if (!$this->didVote($poll_id)) {
+        if (!$this->didVote($poll_id)) {
 
-           $offeredAnswer = $this->OfferedAnswers->get($id, [
-               'contain' => []
-           ]);
+            $offeredAnswer = $this->OfferedAnswers->get($id, [
+                'contain' => []
+            ]);
 
-           $offeredAnswer->count = $offeredAnswer->count + 1;
+            $offeredAnswer->count = $offeredAnswer->count + 1;
 
-           if ($this->OfferedAnswers->save($offeredAnswer)) {
+            if ($this->OfferedAnswers->save($offeredAnswer) && $this->votedOnPoll($poll_id) ) {
 
-               $this->votedOnPoll($poll_id);
+                $response = [
+                    'code' => 0,
+                    'message' => "Voted successfully"
+                ];
 
-               $response = ["success" => true];
-           } else
-               $response = ["success" => false];
+            } else
+                $response = [
+                    'code' => -1,
+                    'message' => 'Couldn\'t vote'
+                ];
 
-       } else
-           $response = [
-               "success" => false,
-               "error" => "Did vote already"
-           ];
+        } else
+            $response = [
+                "success" => false,
+                "error" => "Did vote already"
+            ];
 
 
         $this->set(compact('response',$response));
