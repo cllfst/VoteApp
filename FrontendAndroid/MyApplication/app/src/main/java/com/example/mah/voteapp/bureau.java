@@ -31,7 +31,7 @@ public class bureau extends Fragment {
             StringBuilder time = new StringBuilder();
             @Override
             public void onFinish() {
-                mTextView.setText("it is Time to vote noob");
+                mTextView.setText("This Tab is under construction");
                 //mTextView.setText("Times Up!");
             }
 

@@ -36,7 +36,7 @@
             android:theme="@style/FullWidthEditSettings"
             android:inputType="textPassword"
             android:textColor="#1da8ff"
-            android:textSize="50px"
+            android:textSize="20dp"
             android:hint="Current pass" />
     </android.support.design.widget.TextInputLayout>
 </LinearLayout>
@@ -62,7 +62,7 @@ android:layout_marginBottom="8dp">
         android:theme="@style/FullWidthEditSettings"
         android:inputType="textPassword"
         android:textColor="#1da8ff"
-        android:textSize="50px"
+        android:textSize="20dp"
         android:hint="New pass"/>
 
 </android.support.design.widget.TextInputLayout>

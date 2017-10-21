@@ -18,25 +18,8 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-     <RadioButton
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:id="@+id/choice1"
-         android:textSize="20dp"
-         android:textColor="@color/colorPrimary"
-         android:text="1"
-         />
-
-     <RadioButton
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:id="@+id/choice2"
-         android:textSize="20dp"
-         android:textColor="@color/colorPrimary"
-         android:text="2"
-         />
-
+        android:layout_marginTop="20dp"
+        android:id="@+id/Group">
 
     </RadioGroup>
 

@@ -15,8 +15,23 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import static android.R.attr.data;
+
 
 public class login extends AppCompatActivity implements View.OnClickListener {
+    private final String TAG ="WAAAAAAAAAAAA";
     private
     SharedPreferences preferences;
     String mail;
@@ -28,6 +43,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
     String password1 ;
     ScrollView myscrollview;
     public static final String MyPREFERENCES = "MyPrefs" ;
+    private JSONObject json ;
 
 
     @Override
@@ -64,10 +80,39 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        mail = "a@a";
-        pass = "123";
+        mail = "admin@admin";
+        pass = "admin";
         email1 = input_email.getText().toString().trim();
         password1  = input_password.getText().toString().trim();
+
+        json = new JSONObject();
+        try {
+            json.put("email", email1);
+            json.put("password", password1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try{
+                    Log.e("JSOOOOOOOOOOOON", "onClick: " + json.toString());
+
+                    String jsonObject = getJSONObjectFromURL("http://10.0.2.2:8765/api/login",json);
+                    Log.e("TAG", "onClick: " + jsonObject );
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+
+
 
         if(TextUtils.isEmpty(email1)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
@@ -110,5 +155,41 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
             return;
         }
+    }
+
+
+    public static String getJSONObjectFromURL(String urlString , JSONObject json) throws IOException, JSONException {
+        HttpURLConnection urlConnection = null;
+
+        URL url = new URL(urlString);
+        urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestMethod("POST");
+        urlConnection.setRequestProperty("accept", "application/json");
+        urlConnection.setReadTimeout(10000 /* milliseconds */ );
+        urlConnection.setConnectTimeout(15000 /* milliseconds */ );
+        urlConnection.setDoOutput(true);
+        urlConnection.connect();
+
+
+        //Write
+        OutputStream outputStream = urlConnection.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+        writer.write(String.valueOf(json));
+        writer.close();
+        outputStream.close();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line + "\n");
+        }
+        br.close();
+
+        String jsonString = sb.toString();
+        System.out.println("JSON: " + jsonString);
+
+        return (jsonString);
     }
 }
