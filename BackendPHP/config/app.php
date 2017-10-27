@@ -257,7 +257,7 @@ return [
              */
             //'port' => 'non_standard_port_number',
             'username' => 'root',
-            'password' => '21828610',
+            'password' => 'root',
             'database' => 'pollsapp',
             'encoding' => 'utf8',
             'timezone' => 'UTC',

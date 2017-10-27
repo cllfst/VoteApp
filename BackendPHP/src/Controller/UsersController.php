@@ -16,6 +16,16 @@ use Cake\Mailer\Email;
 class UsersController extends AppController
 {
 
+//    public $paginate = [
+//        'page' => 1,
+//        'limit' => 5,
+//        'maxLimit' => 15,
+//        'sortWhitelist' => [
+//            'id', 'name'
+//        ]
+//    ];
+
+
     /**
      * Index method
      *
@@ -23,6 +33,7 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $this->request->allowMethod(['']);
         $users = $this->paginate($this->Users);
 
 
