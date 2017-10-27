@@ -42,7 +42,28 @@ use Cake\Routing\Route\DashedRoute;
  *
  */
 Router::defaultRouteClass(DashedRoute::class);
-Router::scope('/', function (RouteBuilder $routes) {    
+
+
+
+Router::prefix('api',function ($routes){
+
+
+    $routes->fallbacks('InflectedRoute');
+
+    Router::connect('/api/register', ['controller' => 'Users', 'action' => 'add', 'prefix' => 'api']);
+    Router::connect('/api/token', ['controller' => 'Users', 'action' => 'token', 'prefix' => 'api']);
+
+    Router::connect('/api/getPollsList', ['controller' => 'Polls', 'action' => 'getPollsList', 'prefix' => 'api']);
+    Router::connect('/api/getPollQuestions/:id', ['controller' => 'Polls', 'action' => 'getPollQuestions', 'prefix' => 'api']);
+    Router::connect('/api/getQuestionChoices/:id', ['controller' => 'Questions', 'action' => 'getQuestionChoices', 'prefix' => 'api']);
+
+    Router::connect('/api/vote/:id',['controller' => 'OfferedAnswers', 'action' => 'vote', 'prefix' => 'api']);
+    Router::connect('/api/didVote/:id',['controller' => 'OfferedAnswers', 'action' => 'didVoteAPI', 'prefix' => 'api']);
+//
+});
+
+Router::scope('/', function (RouteBuilder $routes) {
+
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
      * its action called 'display', and we pass a param to select the view file
@@ -50,16 +71,6 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
-    $routes->connect('/api/getPollsList',['controller' => 'Polls', 'action' => 'index']);
-    $routes->connect('/api/getPollQuestions/:id',['controller' => 'Polls', 'action' => 'view']);
-    $routes->connect('/api/getQuestionChoices/:id',['controller' => 'Questions', 'action' => 'view']);
-
-    $routes->connect('/api/vote/:id',['controller' => 'OfferedAnswers', 'action' => 'vote']);
-    $routes->connect('/api/didVote/:id',['controller' => 'OfferedAnswers', 'action' => 'didVoteAPI']);
-
-    $routes->connect('/api/login',['controller' => 'Users', 'action' => 'login']);
-    $routes->connect('/api/logout',['controller' => 'Users', 'action' => 'logout']);
-    $routes->connect('/api/updatePassword',['controller' => 'Users', 'action' => 'updatePassword']);
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */

@@ -28,6 +28,8 @@ use Cake\Event\Event;
 class AppController extends Controller
 {
 
+    use \Crud\Controller\ControllerTrait;
+
     /**
      * Initialization hook method.
      *
@@ -43,7 +45,7 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        /*$this->loadComponent('Auth', [
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -54,7 +56,7 @@ class AppController extends Controller
             ],
             'loginError' => "Invalid Credentials",
             'authError' => 'you are authorized to access this'
-        ]);*/
+        ]);
 
         /*
          * Enable the following components for recommended CakePHP security settings.
