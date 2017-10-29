@@ -1,0 +1,23 @@
+
+.polls {
+    margin-bottom: 1rem;
+}
+
+.polls .polls-question {
+    margin-bottom: .5rem;
+}
+
+.polls .polls-question .polls-question-label {
+    color: #1779ba;
+    font-weight: 500;
+    margin-right: .25rem;
+}
+
+.polls .polls-submit {
+    margin-top: .3rem;
+}
+
+.polls .polls-submit .button {
+    margin-right: .5rem;
+    text-transform: uppercase;
+}

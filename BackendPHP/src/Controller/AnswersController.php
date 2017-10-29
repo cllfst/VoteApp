@@ -20,6 +20,12 @@ class AnswersController extends AppController
      */
     public function index()
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $this->paginate = [
             'contain' => ['Users', 'Polls']
         ];
@@ -36,8 +42,13 @@ class AnswersController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $answer = $this->Answers->get($id, [
             'contain' => ['Users', 'Polls']
         ]);
@@ -51,8 +62,13 @@ class AnswersController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $answer = $this->Answers->newEntity();
         if ($this->request->is('post')) {
             $answer = $this->Answers->patchEntity($answer, $this->request->getData());
@@ -76,8 +92,13 @@ class AnswersController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $answer = $this->Answers->get($id, [
             'contain' => []
         ]);
@@ -103,8 +124,13 @@ class AnswersController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $this->request->allowMethod(['post', 'delete']);
         $answer = $this->Answers->get($id);
         if ($this->Answers->delete($answer)) {

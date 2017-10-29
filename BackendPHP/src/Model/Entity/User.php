@@ -1,7 +1,6 @@
 <?php
 namespace App\Model\Entity;
 
-use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Entity;
 
 /**
@@ -12,6 +11,9 @@ use Cake\ORM\Entity;
  * @property string $last_name
  * @property string $email
  * @property string $password
+ * @property \Cake\I18n\FrozenTime $created
+ * @property string $description
+ * @property int $admin
  *
  * @property \App\Model\Entity\Answer[] $answers
  */
@@ -32,6 +34,9 @@ class User extends Entity
         'last_name' => true,
         'email' => true,
         'password' => true,
+        'created' => true,
+        'description' => true,
+        'admin' => true,
         'answers' => true
     ];
 
@@ -44,7 +49,7 @@ class User extends Entity
         'password'
     ];
 
-    protected function _setPassword($password){
-        return (new DefaultPasswordHasher)->hash($password);
+    function _getJoinDate() {
+        return date('H:i M dS Y',strtotime($this->created));
     }
 }

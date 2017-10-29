@@ -22,6 +22,11 @@ class OfferedAnswersController extends AppController
     public function index()
     {
 
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $this->paginate = [
             'contain' => ['Questions']
         ];
@@ -40,6 +45,12 @@ class OfferedAnswersController extends AppController
      */
     public function view($id = null)
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $offeredAnswer = $this->OfferedAnswers->get($id, [
             'contain' => ['Questions']
         ]);
@@ -55,6 +66,12 @@ class OfferedAnswersController extends AppController
      */
     public function add()
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $offeredAnswer = $this->OfferedAnswers->newEntity();
         if ($this->request->is('post')) {
             $offeredAnswer = $this->OfferedAnswers->patchEntity($offeredAnswer, $this->request->getData());
@@ -79,6 +96,12 @@ class OfferedAnswersController extends AppController
      */
     public function edit($id = null)
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $offeredAnswer = $this->OfferedAnswers->get($id, [
             'contain' => []
         ]);
@@ -107,6 +130,12 @@ class OfferedAnswersController extends AppController
      */
     public function delete($id = null)
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $this->request->allowMethod(['post', 'delete']);
         $offeredAnswer = $this->OfferedAnswers->get($id);
         if ($this->OfferedAnswers->delete($offeredAnswer)) {

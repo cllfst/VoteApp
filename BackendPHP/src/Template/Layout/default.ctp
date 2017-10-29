@@ -28,22 +28,28 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('profile.css') ?>
+    <?= $this->Html->css('polls.css') ?>
+    <?= $this->Html->css('progressBar.css') ?>
+    <?= $this->Html->script('results') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
+                <h1><a href="/">Polls app</a></h1>
             </li>
         </ul>
         <div class="top-bar-section">
             <ul class="right">
-                <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
+                <li><?= $this->Html->link('Polls', ['controller' => 'Polls' , 'action' => 'index']); ?></li>
+                <li><?= $this->Html->link('Profile', ['controller' => 'users' , 'action' => 'profile']); ?></li>
+                <li><?= $this->Html->link('Settings', ['controller' => 'users' , 'action' => 'settings']); ?></li>
                 <li><?= $this->Html->link('Logout', ['controller' => 'users' , 'action' => 'logout']); ?></li>
             </ul>
         </div>

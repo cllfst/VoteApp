@@ -31,4 +31,8 @@ class OfferedAnswer extends Entity
         'question_id' => true,
         'question' => true
     ];
+
+    function _getPercentage($total) {
+        return ($this->count / $total) * 100;
+    }
 }

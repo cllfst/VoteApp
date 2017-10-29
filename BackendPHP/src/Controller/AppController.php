@@ -82,4 +82,11 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
     }
+
+    public function beforeFilter(Event $event) {
+        $this->set([
+            'loggedIn'=> $this->Auth->user(),
+            'isAdmin'=> $this->Auth->user('admin')
+        ]);
+    }
 }

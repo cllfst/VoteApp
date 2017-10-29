@@ -12,8 +12,6 @@ use Cake\Controller\Controller;
 
 class AppController extends Controller {
 
-    use \Crud\Controller\ControllerTrait;
-
     public function initialize()
     {
         parent::initialize();

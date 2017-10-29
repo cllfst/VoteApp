@@ -19,6 +19,21 @@ class UsersController extends AppController
 
     public function profile() {
 
+        $id = $this->Auth->user('id');
+
+        $user = $this->Users->get($id);
+
+        $Answer = $this->loadModel('Answers');
+        $votedPolls = $Answer->find()
+            ->select()
+            ->where(['user_id' => $user->id])
+            ->count();
+
+        $this->set(['user' => $user,'votedPolls' => $votedPolls]);
+    }
+
+    public function settings() {
+
     }
 
 
@@ -29,6 +44,12 @@ class UsersController extends AppController
      */
     public function index()
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $users = $this->paginate($this->Users);
 
 
@@ -45,6 +66,12 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $user = $this->Users->get($id, [
             'contain' => ['Answers']
         ]);
@@ -60,6 +87,12 @@ class UsersController extends AppController
      */
     public function add()
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -89,6 +122,12 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
@@ -114,6 +153,12 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
@@ -167,7 +212,7 @@ class UsersController extends AppController
                 if ($this->Auth->identify()) {
                     $this->Auth->setUser($this->Auth->identify());
                     $this->Flash->success('logged in successfully');
-                    $this->redirect('/users');
+                    $this->redirect('/');
 
                 } else {
                     $this->Flash->error('Incorrect credentials');

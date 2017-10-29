@@ -20,6 +20,12 @@ class QuestionsController extends AppController
      */
     public function index()
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $this->paginate = [
             'contain' => ['Polls']
         ];
@@ -38,6 +44,12 @@ class QuestionsController extends AppController
      */
     public function view($id = null)
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         if (!$id) {
             $id = $this->request->getParam('id');
         }
@@ -56,6 +68,12 @@ class QuestionsController extends AppController
      */
     public function add()
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $question = $this->Questions->newEntity();
         if ($this->request->is('post')) {
             $question = $this->Questions->patchEntity($question, $this->request->getData());
@@ -80,6 +98,12 @@ class QuestionsController extends AppController
      */
     public function edit($id = null)
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $question = $this->Questions->get($id, [
             'contain' => []
         ]);
@@ -106,6 +130,12 @@ class QuestionsController extends AppController
      */
     public function delete($id = null)
     {
+
+        if (!$this->viewVars['isAdmin']) {
+            $this->Flash->set("You're not Authorized");
+            $this->redirect('/');
+        }
+
         $this->request->allowMethod(['post', 'delete']);
         $question = $this->Questions->get($id);
         if ($this->Questions->delete($question)) {
