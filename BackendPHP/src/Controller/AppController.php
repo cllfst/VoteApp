@@ -28,8 +28,6 @@ use Cake\Event\Event;
 class AppController extends Controller
 {
 
-    use \Crud\Controller\ControllerTrait;
-
     /**
      * Initialization hook method.
      *
