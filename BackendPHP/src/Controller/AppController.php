@@ -45,16 +45,8 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        $this->loadComponent('Crud.Crud',[
-            'actions' => [
-                'Crud.Index',
-                'Crud.View',
-                'Crud.Add',
-                'Crud.Edit',
-                'Crud.Delete'
-            ]
-        ]);
-        /*$this->loadComponent('Auth', [
+
+        $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -65,7 +57,7 @@ class AppController extends Controller
             ],
             'loginError' => "Invalid Credentials",
             'authError' => 'you are authorized to access this'
-        ]);*/
+        ]);
 
         /*
          * Enable the following components for recommended CakePHP security settings.

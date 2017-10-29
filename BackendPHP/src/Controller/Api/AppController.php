@@ -19,18 +19,25 @@ class AppController extends Controller {
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
-        $this->loadComponent('Crud.Crud',[
-            'actions' => [
-                'Crud.Index',
-                'Crud.View',
-                'Crud.Add',
-                'Crud.Edit',
-                'Crud.Delete'
+        $this->loadComponent('Auth',[
+            'storage' => 'Memory',
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                    ]
+                ],
+                'ADmad/JwtAuth.Jwt' => [
+                    'parameter' => 'token',
+                    'userModel' => 'Users',
+                    'fields' => [
+                        'username' => 'id'
+                    ],
+                    'queryDatasource' => true
+                ]
             ],
-            'listeners' => [
-                'Crud.Api',
-                'Crud.ApiPagination'
-            ]
+            'unauthorizedRedirect' => false,
+            'checkAuthIn' => 'Controller.initialize'
         ]);
 
     }

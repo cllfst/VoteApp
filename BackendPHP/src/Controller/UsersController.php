@@ -149,58 +149,41 @@ class UsersController extends AppController
             ->send();
     }
 
+    protected function userExist($email) {
+        $userExist = $this->Users->find()
+            ->select("email")
+            ->where(['email' => $email])
+            ->count();
+
+        if ($userExist == 0)
+            return false;
+        return true;
+    }
+
     public function login() {
 
-        $response = [
-            "code" => -1,
-            "message" => "You are not connected"
-        ];
         if ($this->request->is('post')) {
 
-            $userExist = $this->Users->find()
-                ->select("email")
-                ->where(['email' => $this->request->getData('email')])
-                ->count();
-
-            if ($userExist == 0 ) {
-                $response = [
-                    'code' => -2,
-                    'message' => 'Email does not exist'
-                ];
+            if (!$this->userExist($this->request->getData('email'))) {
+                $this->Flash->error('Email does not exist');
 
             } else {
 
                 if ($this->Auth->identify()) {
                     $this->Auth->setUser($this->Auth->identify());
-
-                    $response = [
-                        'code' => 0,
-                        'message' => 'logged in successfully'
-                    ];
+                    $this->Flash->success('logged in successfully');
+                    $this->redirect('/users');
 
                 } else {
-                    $response = [
-                        'code' => -3,
-                        'message' => 'Incorrect credentials'
-                    ];
+                    $this->Flash->error('Incorrect credentials');
                 }
             }
         }
-
-        $this->set(compact('response',$response));
-        $this->set('_serialize',['response']);
-
     }
 
     public function logout() {
 
-        $this->Auth->logout();
-        $response = [
-            "code" => 0,
-            "message" => "logged out successful"
-        ];
-        $this->set(compact("response",$response));
-        $this->set('_serialize',['response']);
+        $this->redirect($this->Auth->logout());
 
     }
 
