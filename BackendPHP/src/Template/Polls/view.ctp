@@ -1,94 +1,100 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Poll $poll
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Poll'), ['action' => 'edit', $poll->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Poll'), ['action' => 'delete', $poll->id], ['confirm' => __('Are you sure you want to delete # {0}?', $poll->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Polls'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Poll'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Answers'), ['controller' => 'Answers', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Answer'), ['controller' => 'Answers', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Questions'), ['controller' => 'Questions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Question'), ['controller' => 'Questions', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="polls view large-9 medium-8 columns content">
-    <h3><?= h($poll->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= h($poll->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Text') ?></th>
-            <td><?= h($poll->text) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Start Date') ?></th>
-            <td><?= h($poll->start_date) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('End Date') ?></th>
-            <td><?= h($poll->end_date) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Is Open') ?></th>
-            <td><?= $poll->is_open ? __('Yes') : __('No'); ?></td>
-        </tr>
-    </table>
-    <div class="related">
-        <h4><?= __('Related Answers') ?></h4>
-        <?php if (!empty($poll->answers)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col"><?= __('Poll Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($poll->answers as $answers): ?>
-            <tr>
-                <td><?= h($answers->id) ?></td>
-                <td><?= h($answers->user_id) ?></td>
-                <td><?= h($answers->poll_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Answers', 'action' => 'view', $answers->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Answers', 'action' => 'edit', $answers->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Answers', 'action' => 'delete', $answers->id], ['confirm' => __('Are you sure you want to delete # {0}?', $answers->id)]) ?>
-                </td>
-            </tr>
+<br><br><br>
+
+<div class="row text-center">
+
+    <h1><?= $poll->text ?></h1>
+
+    <?php if($poll->is_open): ?>
+        <?= $this->Form->create() ?>
+        <div class="polls">
+            <?php $i=0 ?>
+            <?php foreach ($poll->questions as $question): ?>
+                <h5 class="polls-question">
+                    <span class="polls-question-label">Q:</span>
+                    <?= $question->question_text ?>
+                </h5>
+                <div class="polls-options">
+                    <?php foreach ($choices[$i] as $choice): ?>
+
+                        <div>
+                            <input type="radio" name="<?= $question->id ?>" value="<?= $choice->id ?>" id="<?= $choice->id ?>" required>
+                            <label for="choice"><?= $choice->answer_text ?></label>
+                        </div>
+                    <?php endforeach; ?>
+                    <?php $i++ ?>
+
+                </div>
             <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Questions') ?></h4>
-        <?php if (!empty($poll->questions)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Question Text') ?></th>
-                <th scope="col"><?= __('Poll Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($poll->questions as $questions): ?>
-            <tr>
-                <td><?= h($questions->id) ?></td>
-                <td><?= h($questions->question_text) ?></td>
-                <td><?= h($questions->poll_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Questions', 'action' => 'view', $questions->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Questions', 'action' => 'edit', $questions->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Questions', 'action' => 'delete', $questions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $questions->id)]) ?>
-                </td>
-            </tr>
+
+        </div>
+        <div class="polls-submit">
+            <?= $this->Form->submit('Submit Vote',['class' => 'button']) ?>
+        </div>
+        <?= $this->Form->end() ?>
+
+    <?php else: ?>
+
+
+        <div class="polls">
+            <?php $i=0 ?>
+            <?php foreach ($poll->questions as $question): ?>
+                <h5 class="polls-question">
+                    <span class="polls-question-label">Q:</span>
+                    <?= $question->question_text ?>
+                </h5>
+                <div class="polls-options">
+                    <div class="span6">
+                        <?php foreach ($choices[$i] as $choice): ?>
+
+                            <strong><?= $choice->answer_text?></strong><span class="pull-right"> 30%</span>
+                            <br>
+                            <div class="push-3">
+                                <div class="" id="myProgress">
+                                    <div class="progress-meter" id="myBar" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                            <br>
+                        <?php endforeach; ?>
+                        <?php $i++ ?>
+                    </div>
+                </div>
             <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-</div>
+
+        </div>
+    <?php endif; ?>
+
+
+    <!--    <div>-->
+    <!--        <div id="myProgress">-->
+    <!--            <div id="myBar"></div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+
+    <!--    <div class="span6">-->
+    <!--        <h5>Poll: Where do you usually browse</h5>-->
+    <!--        <strong>Windows PC</strong><span class="pull-right">30%</span>-->
+    <!--        <div class="progress danger active">-->
+    <!--            <div class="progress-meter" id="myBar" style="width: 30%;"></div>-->
+    <!--        </div>-->
+    <!--        <strong>Mac</strong><span class="pull-right">40%</span>-->
+    <!--        <div class="progress success active">-->
+    <!--            <div class="progress-meter" id="myBar" style="width: 40%;background-color: red"></div>-->
+    <!--        </div>-->
+    <!--        <strong>iPad/iPhone</strong><span class="pull-right">10%</span>-->
+    <!--        <div class="progress progress-striped active">-->
+    <!--            <div class="bar" style="width: 10%;"></div>-->
+    <!--        </div>-->
+    <!--        <strong>Android</strong><span class="pull-right">5%</span>-->
+    <!--        <div class="progress progress-success active">-->
+    <!--            <div class="bar" style="width: 5%;"></div>-->
+    <!--        </div>-->
+    <!--        <strong>Others</strong><span class="pull-right">15%</span>-->
+    <!--        <div class="progress progress-warning active">-->
+    <!--            <div class="bar" style="width: 15%;"></div>-->
+    <!--        </div>-->
+    <!--        <p>-->
+    <!--            <a href="#" class="btn btn-large btn-success">Vote</a>-->
+    <!--            <a href="#" class="pull-right">View detailed results</a>-->
+    <!--        </p>-->
+    <!--    </div>-->

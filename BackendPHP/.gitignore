@@ -1,0 +1,10 @@
+BackendPHP/BackendPHP.iml
+BackendPHP/vendor
+BackendPHP/logs/
+BackendPHP/tmp/
+BackendPHP/tests/
+BackendPHP.iml
+vendor/*
+logs/
+tmp/
+tests/

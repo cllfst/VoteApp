@@ -245,7 +245,16 @@ response : 200 (json)
 }
 ```
 
-`GET` /api/vote/{offered_answer_id} : increment an offered_answer vote count by one.
+`POST` /api/vote: increment an offered_answer vote count by one.
+
+body request (json) : contains answers id, keys (1,2...) are irrelevant, they're just needed for valid json content.
+
+```json
+{
+	"1":"04795476-84a5-4b18-abfb-bebef1d91c22",
+	"2":"d872ff3c-f2be-44b2-8857-05ad97c854f0"
+}
+```
 
 response : 200 (json) : successful vote
 

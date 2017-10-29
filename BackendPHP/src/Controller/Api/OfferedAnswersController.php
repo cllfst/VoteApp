@@ -58,7 +58,6 @@ class OfferedAnswersController extends AppController {
         }
 
         $Answers = $this->loadModel('Answers');
-
         $entity = $Answers->newEntity();
 
         $data = [
@@ -74,54 +73,118 @@ class OfferedAnswersController extends AppController {
             return false;
     }
 
-    public function vote() {
-
-        $this->request->allowMethod(['get']);
-
-        $id = $this->request->getParam('id');
-        $offeredAnswer = $this->OfferedAnswers->get($id);
-
+    protected function getPoll($question_id) {
 
         $Polls = $this->loadModel('questions');
+
         $poll_id = $Polls->find()
             ->select('poll_id')
-            ->where(['id' => $offeredAnswer->question_id])
+            ->where(['id' => $question_id])
             ->first()['poll_id'];
+        return $poll_id;
+    }
 
+    protected function getQuestion($choice_id) {
+        $OfferedAnswers = $this->loadModel('OfferedAnswers');
+        $question_id  = $OfferedAnswers->find()
+            ->select('question_id')
+            ->where(['id' => $choice_id])
+            ->first()['question_id'];
+        return $question_id;
+    }
 
-        if (!$this->didVote($poll_id)) {
+    public function vote() {
 
-            $offeredAnswer = $this->OfferedAnswers->get($id, [
-                'contain' => []
-            ]);
+        $choices = [];
+        foreach ($this->request->getData() as $choice) {
+            array_push($choices,$choice);
+        }
 
-            $offeredAnswer->count = $offeredAnswer->count + 1;
+        $question_id = $this->getQuestion($choices[0]);
+        $poll_id = $this->getPoll($question_id);
 
-            if ($this->OfferedAnswers->save($offeredAnswer) && $this->votedOnPoll($poll_id) ) {
+        if ($this->didVote($poll_id)) {
 
-                $this->set([
-                    'code' => 0,
-                    'data' => [
-                        'message' => "Voted successfully"
-                    ]
-                ]);
-
-            } else
-                $this->set([
-                    'code' => -1,
-                    'data' => [
-                        'message' => 'Couldn\'t vote'
-                    ]
-                ]);
-
-        } else
             $this->set([
                 "code" => -2,
                 'data' => [
                     "message" => "Did vote already"
-                ]
+                ],
+                '_serialize' => ['code','data']
             ]);
 
+        } else {
+
+            foreach ($choices as $question => $choice) {
+                $offeredAnswer = $this->OfferedAnswers->get($choice);
+                $offeredAnswer->count = $offeredAnswer->count +1;
+
+                if (!$this->OfferedAnswers->save($offeredAnswer)) {
+
+                    $this->set([
+                        'code' => -1,
+                        'data' => [
+                            'message' => 'Couldn\'t vote'
+                        ],
+                        '_serialize' => ['code','data']
+                    ]);
+                    exit(0);
+                }
+            }
+            $this->votedOnPoll($poll_id);
+            $this->set([
+                'code' => 0,
+                'data' => [
+                    'message' => "Voted successfully"
+                ],
+                '_serialize' => ['code','data']
+            ]);
+        }
+
+
+//        $offeredAnswer = $this->OfferedAnswers->get($id);
+//
+//
+//        $Polls = $this->loadModel('questions');
+//        $poll_id = $Polls->find()
+//            ->select('poll_id')
+//            ->where(['id' => $offeredAnswer->question_id])
+//            ->first()['poll_id'];
+//
+//
+//        if (!$this->didVote($poll_id)) {
+//
+//            $offeredAnswer = $this->OfferedAnswers->get($id, [
+//                'contain' => []
+//            ]);
+//
+//            $offeredAnswer->count = $offeredAnswer->count + 1;
+//
+//            if ($this->OfferedAnswers->save($offeredAnswer) && $this->votedOnPoll($poll_id) ) {
+//
+//                $this->set([
+//                    'code' => 0,
+//                    'data' => [
+//                        'message' => "Voted successfully"
+//                    ]
+//                ]);
+//
+//            } else
+//                $this->set([
+//                    'code' => -1,
+//                    'data' => [
+//                        'message' => 'Couldn\'t vote'
+//                    ]
+//                ]);
+//
+//        } else
+//            $this->set([
+//                "code" => -2,
+//                'data' => [
+//                    "message" => "Did vote already"
+//                ]
+//            ]);
+//
 
         $this->set('_serialize', ['code','data']);
     }
