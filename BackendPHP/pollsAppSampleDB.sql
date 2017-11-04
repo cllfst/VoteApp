@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 15, 2017 at 10:01 PM
--- Server version: 5.7.19-0ubuntu0.16.04.1
+-- Generation Time: Nov 04, 2017 at 01:52 PM
+-- Server version: 5.7.20-0ubuntu0.16.04.1
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,89 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answers`
---
-
-CREATE TABLE `answers` (
-  `id` char(36) NOT NULL,
-  `user_id` char(36) NOT NULL,
-  `poll_id` char(36) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `answers`
---
-
-INSERT INTO `answers` (`id`, `user_id`, `poll_id`) VALUES
-('7c321530-836a-48ae-9a43-152c06464902', 'f395f557-b7e0-44be-be26-67a519dd2bc6', '30880f19-cd85-43e2-aa40-fe29a304a0cb');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `offered_answers`
---
-
-CREATE TABLE `offered_answers` (
-  `id` char(36) NOT NULL,
-  `answer_text` varchar(256) NOT NULL,
-  `count` int(11) DEFAULT '0',
-  `question_id` char(36) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `offered_answers`
---
-
-INSERT INTO `offered_answers` (`id`, `answer_text`, `count`, `question_id`) VALUES
-('04795476-84a5-4b18-abfb-bebef1d91c22', 'CA', 15, '89b83179-7c85-445f-a835-3be529f114f1'),
-('5c812729-cc55-45a2-ba1b-8c304c3e3baa', 'MT', 0, '89b83179-7c85-445f-a835-3be529f114f1'),
-('aef75c0a-afce-4e52-a31e-d57b6a3a2b8e', 'RR', 0, '64b90327-dfbc-4c44-b3b9-5b08bac71faa'),
-('d872ff3c-f2be-44b2-8857-05ad97c854f0', 'KN', 0, '64b90327-dfbc-4c44-b3b9-5b08bac71faa');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `polls`
---
-
-CREATE TABLE `polls` (
-  `id` char(36) NOT NULL,
-  `text` varchar(256) NOT NULL,
-  `start_date` timestamp NULL DEFAULT NULL,
-  `end_date` timestamp NULL DEFAULT NULL,
-  `is_open` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `polls`
---
-
-INSERT INTO `polls` (`id`, `text`, `start_date`, `end_date`, `is_open`) VALUES
-('30880f19-cd85-43e2-aa40-fe29a304a0cb', 'Elections CLLFST', '2017-10-11 22:12:00', '2017-10-11 22:12:00', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `questions`
---
-
-CREATE TABLE `questions` (
-  `id` char(36) NOT NULL,
-  `question_text` varchar(256) NOT NULL,
-  `poll_id` char(36) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `questions`
---
-
-INSERT INTO `questions` (`id`, `question_text`, `poll_id`) VALUES
-('64b90327-dfbc-4c44-b3b9-5b08bac71faa', 'Mediatisation ? ', '30880f19-cd85-43e2-aa40-fe29a304a0cb'),
-('89b83179-7c85-445f-a835-3be529f114f1', 'SG ? ', '30880f19-cd85-43e2-aa40-fe29a304a0cb');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -114,44 +31,24 @@ CREATE TABLE `users` (
   `first_name` varchar(256) NOT NULL,
   `last_name` varchar(256) NOT NULL,
   `email` varchar(256) NOT NULL,
-  `password` varchar(256) NOT NULL
+  `password` varchar(256) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `description` varchar(255) DEFAULT NULL,
+  `admin` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`) VALUES
-('bb8b412a-bb51-4966-bde8-933b737d92df', 'Mahmoud', 'Turki', 'mahmoud@tur.ki', '$2y$10$lvkWCaGaDqWdpVERPufDYODBCFEtOqwvTNYQQf/n85W.EFsxr20Oy'),
-('f395f557-b7e0-44be-be26-67a519dd2bc6', 'Aymen', 'Chebbi', 'aymen.chebi@gmail.com', '$2y$10$hQNhw1EzO7CJOnsabKq1h.gXpeqTfLnBH4CoUiFkitecsgu3rtOF6');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `created`, `description`, `admin`) VALUES
+('40f18202-86ef-4bd0-8895-c7730d7a9b1b', 'aymen', 'chebbi', 'aymen@gmail.com', '$2y$10$dWpUMQFPWtyGHINSTJGYuObq8NKE9LIrNdb6wWn.HBbp3/Akh4jui', '2017-10-29 12:04:42', NULL, 0),
+('af6cf673-5d93-45d8-b2dc-8bc7e5842d7c', 'aymen', 'chebbi', 'aymen.chebi@gmail.com', '$2y$10$G9QNQltIaqwYyWQ7QUweUe4xOpH24nGB0S2BFg.8mKLlASuQKFrNq', '2017-10-29 11:02:18', '21 year old Tunisian, Tech enthusiast & OpenSource supporter. Computer Science Engineering Student at Faculty of Science of Tunis. General Secretary at CLLFST.', 1),
+('dc71e974-db24-425e-95b8-a13e716cd5b4', 'Mahmoud', 'Turki', 'mahmoud.tuurki@gmail.com', '$2y$10$/IotZ4L6pqtLE62CIJTP0OvpXD8DtqpJSHAdUtmxsZVNdSVJIFHSq', '2017-11-04 12:40:34', NULL, 1);
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `answers`
---
-ALTER TABLE `answers`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `offered_answers`
---
-ALTER TABLE `offered_answers`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `polls`
---
-ALTER TABLE `polls`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
