@@ -4,8 +4,4 @@ BackendPHP/logs/
 BackendPHP/tmp/
 BackendPHP/tests/
 BackendPHP.iml
-vendor/*
-logs/
-tmp/
-tests/
-.idea/
+Backend/.idea/

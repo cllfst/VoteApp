@@ -39,8 +39,8 @@ class UsersController extends AppController {
                 ]);
             } else {
                 $user = $this->Users->patchEntity($user, $this->request->getData());
-//                $password = $this->random_password(10);
-                $password = 'root';
+                $password = $this->random_password(10);
+//                $password = 'root';
                 $user->password = $password;
 
                 if ($this->Users->save($user)) {
