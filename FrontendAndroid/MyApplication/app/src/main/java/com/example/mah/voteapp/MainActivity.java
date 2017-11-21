@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+
+
     }
 
 
@@ -51,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
                 logout_intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("logged", false);
+                editor.putString("token", "");
                 editor.commit();
                 startActivity(logout_intent);
                 finish();
-                Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.settings:
                 Intent settings_intent = new Intent(MainActivity.this,settings.class);

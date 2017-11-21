@@ -12,9 +12,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.text.TextUtils.isEmpty;
+import static org.apache.http.protocol.HTTP.USER_AGENT;
 
 public class settings extends AppCompatActivity implements View.OnClickListener {
     private
@@ -25,6 +46,9 @@ public class settings extends AppCompatActivity implements View.OnClickListener 
     String oldpass1 , newpass1;
     String input_pass;
     public static final String MyPREFERENCES = "MyPrefs" ;
+    String jsonObject;
+    private static final String local = "http://10.42.0.1:8765/api/";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,17 +94,50 @@ public class settings extends AppCompatActivity implements View.OnClickListener 
                 return;
             } else {
                 if (newpass1.length() < 6) {
-                    Toast.makeText(this, "Too short!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "New Password, too short!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
 
                     if (oldpass1.equals(input_pass)) {
-                        Toast.makeText(this, "Password changed", Toast.LENGTH_SHORT).show();
-                        Intent settings_main = new Intent(settings.this,MainActivity.class);
-                        settings_main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        settings_main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(settings_main);
-                        finish();
+
+                        final List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                        nameValuePairs.add(new BasicNameValuePair("current_password", oldpass1));
+                        nameValuePairs.add(new BasicNameValuePair("password", newpass1));
+
+                        Thread thread = new Thread(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                try{
+                                    jsonObject = getJSONObjectFromURL(local+"updatePassword",nameValuePairs);
+                                    Log.e("TAG", "onClick: " + jsonObject );
+
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread.start();
+                        try {
+                            thread.join();
+
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("pass" , newpass1);
+                            Intent settings_main = new Intent(settings.this,MainActivity.class);
+                            settings_main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            settings_main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(settings_main);
+                            finish();
+                            Toast.makeText(this, "Password changed", Toast.LENGTH_SHORT).show();
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
 
                     } else {
                         Toast.makeText(this, "Current pass is wrong!!", Toast.LENGTH_LONG).show();
@@ -91,6 +148,45 @@ public class settings extends AppCompatActivity implements View.OnClickListener 
             }
         }
 
+    public String getJSONObjectFromURL(String urlString, List nameValuePairs) throws IOException, JSONException {
+        HttpURLConnection urlConnection = null;
+
+        HttpClient client = new DefaultHttpClient();
+        HttpPost request = new HttpPost(urlString);
+
+        // add request header
+        //String msg = json.toString();
+
+        request.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF8"));
+        SharedPreferences preferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        String token = preferences.getString("token", "defaultStringIfNothingFound");
+
+        // add request header
+        request.addHeader("Authorization", "Bearer "+ token );
+        request.addHeader("Accept", "application/json");
+        request.addHeader(HTTP.CONTENT_TYPE,"application/x-www-form-urlencoded;charset=UTF-8");
+
+        request.addHeader("User-Agent", USER_AGENT);
+        HttpResponse response = client.execute(request);
+        URL url = new URL(urlString);
+
+
+        System.out.println("\nSending 'GET' request to URL : " + url);
+        System.out.println("Response Code : " +
+                response.getStatusLine().getStatusCode());
+
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
+        }
+
+        return (result.toString());
+    }
 }
 
 

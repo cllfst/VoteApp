@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_settings"
@@ -15,25 +16,59 @@
         style="@style/MyToolbar"
         />
 
-    <RadioGroup
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/Group">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/votes"
+        >
 
-    </RadioGroup>
 
-    <Button
-        android:id="@+id/vote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:layout_gravity="center"
-        android:theme="@style/MyButtonSettings"
-        android:text="Confirm"
-        android:textColor="#fff"
-        />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/Group">
 
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:layout_gravity="center"
+            android:theme="@style/MyButtonSettings"
+            android:text="Confirm"
+            android:textColor="#fff"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cd"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="20dp"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/results">
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:gravity="center"
+            />
+    </LinearLayout>
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,7 +50,7 @@ import static org.apache.http.protocol.HTTP.USER_AGENT;
 public class decisions extends Fragment {
     public static final String MyPREFERENCES = "MyPrefs";
     SharedPreferences preferences;
-
+    private static final String local = "http://10.42.0.1:8765/api/";
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -72,17 +73,25 @@ public class decisions extends Fragment {
             @Override
             public void run() {
                 try {
-
-                    String jsonObject = getJSONObjectFromURL("http://10.0.2.2:8765/api/getPollsList");
+                    String jsonObject = getJSONObjectFromURL(local+"getPollsList");
                     JSONObject jsonn = new JSONObject(jsonObject);
-                    JSONArray jsonaray= jsonn.getJSONArray("polls");
+                    JSONArray jsonaray= jsonn.getJSONArray("data");
                     for(int i = 1 ; i<jsonaray.length(); i++ ) {
                         JSONObject oneObject = jsonaray.getJSONObject(i);
 
                         Polls.add(oneObject.getString("text"));
                         PollsID.add(oneObject.getString("id"));
+                        String jsonObjectQ = getJSONObjectFromURL(local+"/getPollQuestions/" + oneObject.getString("id"));
+                        JSONObject jsonnQ = new JSONObject(jsonObjectQ);
+                        JSONObject jsonnQQ = jsonnQ.getJSONObject("data");
+                        JSONArray questions = jsonnQQ.getJSONArray("questions");
+                        String question_text = questions.getJSONObject(0).getString("question_text");
+                        String question_id = questions.getJSONObject(0).getString("id");
+                        Questions.add(question_text);
+                        QuestionsID.add(question_id);
 
                     }
+
 
                     } catch (IOException e) {
                     e.printStackTrace();
@@ -144,20 +153,25 @@ public class decisions extends Fragment {
         System.out.println(Polls);
         for (int i = 0 ; i < (Polls.toArray()).length ; i ++) {
             Log.e("a3", "getDataSet: " + (Polls.toArray())[i]);
-            DataObject obj = new DataObject((String) (Polls.toArray())[i],"Description " + i);
+            DataObject obj = new DataObject((String) (Polls.toArray())[i],"" + (Questions.toArray())[i]);
             results.add(i, obj);
         }
         return results;
     }
 
-    public static String getJSONObjectFromURL(String urlString) throws IOException, JSONException
+    public String getJSONObjectFromURL(String urlString) throws IOException, JSONException
     {
 
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet(urlString);
+        SharedPreferences preferences = getActivity().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        String token = preferences.getString("token", "defaultStringIfNothingFound");
+        Log.e(TAG, "getJSONObjectFromURL: " + token);
 
         // add request header
         request.addHeader("Accept","application/json");
+        request.addHeader("Authorization", "Bearer "+ token );
         request.addHeader("User-Agent", USER_AGENT);
 
         HttpResponse response = client.execute(request);

@@ -12,9 +12,20 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,16 +37,20 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.R.attr.data;
+import static org.apache.http.protocol.HTTP.USER_AGENT;
 
 
 public class login extends AppCompatActivity implements View.OnClickListener {
     private final String TAG ="WAAAAAAAAAAAA";
+    private static final String local = "http://10.42.0.1:8765/api/";
+
     private
     SharedPreferences preferences;
-    String mail;
-    String pass;
+
     EditText input_email;
     EditText input_password ;
     Button btn_login ;
@@ -43,7 +58,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
     String password1 ;
     ScrollView myscrollview;
     public static final String MyPREFERENCES = "MyPrefs" ;
-    private JSONObject json ;
+    String jsonObject;
 
 
     @Override
@@ -80,40 +95,9 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        mail = "admin@admin";
-        pass = "admin";
+
         email1 = input_email.getText().toString().trim();
         password1  = input_password.getText().toString().trim();
-
-        json = new JSONObject();
-        try {
-            json.put("email", email1);
-            json.put("password", password1);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try{
-                    Log.e("JSOOOOOOOOOOOON", "onClick: " + json.toString());
-
-                    String jsonObject = getJSONObjectFromURL("http://10.0.2.2:8765/api/login",json);
-                    Log.e("TAG", "onClick: " + jsonObject );
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-
-
-
-
         if(TextUtils.isEmpty(email1)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
             return;
@@ -123,9 +107,42 @@ public class login extends AppCompatActivity implements View.OnClickListener {
             Toast.makeText(this,"Please enter password",Toast.LENGTH_SHORT).show();
             return;
         }
-        if(mail.equals(email1))
-        {
-            if(pass.equals(password1))
+        final List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add(new BasicNameValuePair("email", email1));
+        nameValuePairs.add(new BasicNameValuePair("password", password1));
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                try{
+                    jsonObject = getJSONObjectFromURL(local+"token",nameValuePairs);
+                    Log.e("TAG", "onClick: " + jsonObject );
+                   } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+            JSONObject jsonObject1 = new JSONObject(jsonObject);
+            if(jsonObject1.getLong("code") == -1 )
+            {
+                Toast.makeText(getApplicationContext(), "Email not found", Toast.LENGTH_LONG).show();
+                input_email.getText().clear();
+                input_password.getText().clear();
+
+                return;
+            }
+            else if(jsonObject1.getLong("code") == -2 ) {
+                Toast.makeText(getApplicationContext(), "Wrong password", Toast.LENGTH_SHORT).show();
+                input_password.getText().clear();
+                return;
+            }
+            else
             {
                 Intent main = new Intent(login.this,MainActivity.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -134,62 +151,53 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 editor.putString("mail" , email1);
                 editor.putString("pass",password1);
                 editor.putBoolean("logged", true);
+                JSONObject data = jsonObject1.getJSONObject("data");
+                String token = data.getString("token");
+                editor.putString("token", token);
                 editor.commit();
                 startActivity(main);
                 finish();
-                Toast.makeText(this,"Welcome",Toast.LENGTH_SHORT).show();
-
             }
-            else
-            {
-                Toast.makeText(this,"Wrong password",Toast.LENGTH_SHORT).show();
-                input_password.getText().clear();
-                return;
-            }
-        }
-        else
-        {
-            Toast.makeText(this,"Email not found",Toast.LENGTH_LONG).show();
-            input_email.getText().clear();
-            input_password.getText().clear();
-
-            return;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
 
-    public static String getJSONObjectFromURL(String urlString , JSONObject json) throws IOException, JSONException {
+    public static String getJSONObjectFromURL(String urlString , List nameValuePairs) throws IOException, JSONException {
         HttpURLConnection urlConnection = null;
 
+        HttpClient client = new DefaultHttpClient();
+        HttpPost request = new HttpPost(urlString);
+
+        // add request header
+        //String msg = json.toString();
+
+        request.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF8"));
+
+        request.addHeader("Accept", "application/json");
+        request.addHeader(HTTP.CONTENT_TYPE,"application/x-www-form-urlencoded;charset=UTF-8");
+
+        request.addHeader("User-Agent", USER_AGENT);
+        HttpResponse response = client.execute(request);
         URL url = new URL(urlString);
-        urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setRequestMethod("POST");
-        urlConnection.setRequestProperty("accept", "application/json");
-        urlConnection.setReadTimeout(10000 /* milliseconds */ );
-        urlConnection.setConnectTimeout(15000 /* milliseconds */ );
-        urlConnection.setDoOutput(true);
-        urlConnection.connect();
 
 
-        //Write
-        OutputStream outputStream = urlConnection.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-        writer.write(String.valueOf(json));
-        writer.close();
-        outputStream.close();
+        System.out.println("\nSending 'GET' request to URL : " + url);
+        System.out.println("Response Code : " +
+                response.getStatusLine().getStatusCode());
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
-        StringBuilder sb = new StringBuilder();
+        BufferedReader rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
 
-        String line;
-        while ((line = br.readLine()) != null) {
-            sb.append(line + "\n");
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
         }
-        br.close();
 
-        String jsonString = sb.toString();
-        System.out.println("JSON: " + jsonString);
-
-        return (jsonString);
+        return (result.toString());
     }
 }
