@@ -184,9 +184,12 @@ public class vote extends AppCompatActivity implements View.OnClickListener {
                     String Start_Date = jsonDate.getString("start_date");
                     String End_Date = jsonDate.getString("end_date");
                     Start_Date = Start_Date.replaceAll("\\D+","");
-                    
+                    int startDate =  Integer.parseInt(Start_Date)/1000000;
+                    //Start_Date = String.valueOf(startDate);
 
-                    Log.e(TAG, "run: " + Start_Date);
+
+
+                    Log.e(TAG, "run: " + startDate);
                     Log.e(TAG, "run: " + End_Date);
 
                     JSONArray jsonarayA = jsonnAA.getJSONArray("offered_answers");

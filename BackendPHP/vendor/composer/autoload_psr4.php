@@ -28,6 +28,7 @@ return array(
     'Migrations\\' => array($vendorDir . '/cakephp/migrations/src'),
     'M1\\Env\\' => array($vendorDir . '/m1/env/src'),
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
+    'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'DebugKit\\Test\\Fixture\\' => array($vendorDir . '/cakephp/debug_kit/tests/Fixture'),
     'DebugKit\\' => array($vendorDir . '/cakephp/debug_kit/src'),
     'Composer\\Spdx\\' => array($vendorDir . '/composer/spdx-licenses/src'),
@@ -43,4 +44,5 @@ return array(
     'Aura\\Intl\\' => array($vendorDir . '/aura/intl/src'),
     'App\\Test\\' => array($baseDir . '/tests'),
     'App\\' => array($baseDir . '/src'),
+    'ADmad\\JwtAuth\\' => array($vendorDir . '/admad/cakephp-jwt-auth/src'),
 );

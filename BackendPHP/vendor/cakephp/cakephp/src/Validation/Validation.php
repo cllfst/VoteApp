@@ -172,13 +172,13 @@ class Validation
         }
         $cards = [
             'all' => [
-                'amex' => '/^3[4|7]\\d{13}$/',
+                'amex' => '/^3[47]\\d{13}$/',
                 'bankcard' => '/^56(10\\d\\d|022[1-5])\\d{10}$/',
                 'diners' => '/^(?:3(0[0-5]|[68]\\d)\\d{11})|(?:5[1-5]\\d{14})$/',
                 'disc' => '/^(?:6011|650\\d)\\d{12}$/',
                 'electron' => '/^(?:417500|4917\\d{2}|4913\\d{2})\\d{10}$/',
                 'enroute' => '/^2(?:014|149)\\d{11}$/',
-                'jcb' => '/^(3\\d{4}|2100|1800)\\d{11}$/',
+                'jcb' => '/^(3\\d{4}|2131|1800)\\d{11}$/',
                 'maestro' => '/^(?:5020|6\\d{3})\\d{12}$/',
                 'mc' => '/^(5[1-5]\\d{14})|(2(?:22[1-9]|2[3-9][0-9]|[3-6][0-9]{2}|7[0-1][0-9]|720)\\d{12})$/',
                 'solo' => '/^(6334[5-9][0-9]|6767[0-9]{2})\\d{10}(\\d{2,3})?$/',
@@ -498,7 +498,7 @@ class Validation
      * @param string|int|null $format any format accepted by IntlDateFormatter
      * @return bool Success
      * @throws \InvalidArgumentException when unsupported $type given
-     * @see \Cake\I18N\Time::parseDate(), \Cake\I18N\Time::parseTime(), \Cake\I18N\Time::parseDateTime()
+     * @see \Cake\I18n\Time::parseDate(), \Cake\I18n\Time::parseTime(), \Cake\I18n\Time::parseDateTime()
      */
     public static function localizedTime($check, $type = 'datetime', $format = null)
     {
@@ -904,11 +904,14 @@ class Validation
      * @param string $check Value to check
      * @param bool $strict Require URL to be prefixed by a valid scheme (one of http(s)/ftp(s)/file/news/gopher)
      * @return bool Success
+     * @link https://tools.ietf.org/html/rfc3986
      */
     public static function url($check, $strict = false)
     {
         static::_populateIp();
-        $alpha = '0-9\p{L}\p{N}';
+
+        $emoji = '\x{1F190}-\x{1F9EF}';
+        $alpha = '0-9\p{L}\p{N}' . $emoji;
         $hex = '(%[0-9a-f]{2})';
         $subDelimiters = preg_quote('/!"$&\'()*+,-.@_:;=~[]', '/');
         $path = '([' . $subDelimiters . $alpha . ']|' . $hex . ')';

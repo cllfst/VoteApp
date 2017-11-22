@@ -213,6 +213,9 @@ function foo()
 test($arg, $arg2);
 test( $arg, $arg2 );
 test(  $arg, $arg2  );
+test();
+test( );
+test(  );
 // @codingStandardsChangeSetting PEAR.Functions.FunctionCallSignature requiredSpacesAfterOpen 0
 // @codingStandardsChangeSetting PEAR.Functions.FunctionCallSignature requiredSpacesBeforeClose 0
 
@@ -350,3 +353,21 @@ $obj->{$x}(1,
   'a','b'
 )('c',
     'd');
+
+class Foo
+{
+    public function bar($a, $b)
+    {
+        if (!$a || !$b) {
+            return;
+        }
+
+        (new stdClass())->a = $a;
+    }
+}
+
+(function ($a, $b) {
+    return function ($c, $d) use ($a, $b) {
+        echo $a, $b, $c, $d;
+    };
+})('a','b')('c','d');

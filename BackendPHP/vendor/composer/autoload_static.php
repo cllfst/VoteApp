@@ -58,6 +58,10 @@ class ComposerStaticInit679a67dd7bbba73a7673c792809580d7
         array (
             'JsonSchema\\' => 11,
         ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
         'D' => 
         array (
             'DebugKit\\Test\\Fixture\\' => 22,
@@ -84,6 +88,7 @@ class ComposerStaticInit679a67dd7bbba73a7673c792809580d7
             'Aura\\Intl\\' => 10,
             'App\\Test\\' => 9,
             'App\\' => 4,
+            'ADmad\\JwtAuth\\' => 14,
         ),
     );
 
@@ -176,6 +181,10 @@ class ComposerStaticInit679a67dd7bbba73a7673c792809580d7
         array (
             0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
         ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
         'DebugKit\\Test\\Fixture\\' => 
         array (
             0 => __DIR__ . '/..' . '/cakephp/debug_kit/tests/Fixture',
@@ -235,6 +244,10 @@ class ComposerStaticInit679a67dd7bbba73a7673c792809580d7
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'ADmad\\JwtAuth\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/admad/cakephp-jwt-auth/src',
         ),
     );
 
