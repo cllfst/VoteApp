@@ -28,27 +28,26 @@ class OfferedAnswersController extends AppController {
 
     }
 
-    public function didVoteAPI() {
 
-        $this->request->allowMethod(['get']);
-        $poll_id = $this->request->getParam('id');
+    public function didVoteAPI($poll_id = null) {
+
+        if (!$poll_id) {
+            $poll_id = $this->request->getParam('id');
+        }
 
         if ($this->didVote($poll_id)) {
-            $this->set([
+            $response = [
                 "code" => -1,
-                'data' => [
-                    'message' => "Did vote already"
-                ],
-                '_serialize', ['code','data']
-            ]);
+                'message' => "Did vote already"
+            ];
         } else
-            $this->set([
+            $response = [
                 "code" => 0,
-                'data' => [
-                    'message' => 'didn\'t vote'
-                ],
-                '_serialize', ['code','data']
-            ]);
+                'message' => 'didn\'t vote'
+            ];
+
+        $this->set(compact('response',$response));
+        $this->set('_serialize', ['response']);
     }
 
     public function votedOnPoll($poll_id = null) {
