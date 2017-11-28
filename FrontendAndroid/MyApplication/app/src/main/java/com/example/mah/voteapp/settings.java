@@ -115,7 +115,6 @@ public class settings extends AppCompatActivity implements View.OnClickListener 
                                     jsonObject = getJSONObjectFromURL(local+"updatePassword",nameValuePairs);
                                     JSONObject jsonn = new JSONObject(jsonObject);
                                     code = jsonn.getString("code");
-                                    Log.e("TAG", "onClick: " + jsonObject );
 
 
                                 } catch (IOException e) {
