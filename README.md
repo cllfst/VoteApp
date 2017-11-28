@@ -1,5 +1,5 @@
 # VoteApp
-a mobile application that allows a cll member to vote for decisions or bureau elections!!
+a mobile Android Native application that allows a cll member to vote for decisions or bureau elections!!
 
 Requirements:
 * JAVA
