@@ -44,8 +44,8 @@ public class bureau extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.bureau,container,false);
-        //t1 = rootView.findViewById(R.id.tab2);
-        //t1.setText("UNDER CONSTRUCTION");
+        t1 = rootView.findViewById(R.id.tab2);
+        t1.setText("UNDER CONSTRUCTION");
 
 
         return rootView;

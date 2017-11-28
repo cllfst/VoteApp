@@ -43,106 +43,52 @@
         "description": "A composer installer for CakePHP 3.0+ plugins."
     },
     {
-        "name": "aura/intl",
-        "version": "3.0.0",
-        "version_normalized": "3.0.0.0",
+        "name": "firebase/php-jwt",
+        "version": "v5.0.0",
+        "version_normalized": "5.0.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/auraphp/Aura.Intl.git",
-            "reference": "7fce228980b19bf4dee2d7bbd6202a69b0dde926"
+            "url": "https://github.com/firebase/php-jwt.git",
+            "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/auraphp/Aura.Intl/zipball/7fce228980b19bf4dee2d7bbd6202a69b0dde926",
-            "reference": "7fce228980b19bf4dee2d7bbd6202a69b0dde926",
+            "url": "https://api.github.com/repos/firebase/php-jwt/zipball/9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
+            "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
             "shasum": ""
         },
         "require": {
-            "php": "^5.6|^7.0"
+            "php": ">=5.3.0"
         },
-        "time": "2017-01-20T05:00:11+00:00",
+        "require-dev": {
+            "phpunit/phpunit": " 4.8.35"
+        },
+        "time": "2017-06-27T22:17:23+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Aura\\Intl\\": "src/"
+                "Firebase\\JWT\\": "src"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "MIT"
+            "BSD-3-Clause"
         ],
         "authors": [
             {
-                "name": "Aura.Intl Contributors",
-                "homepage": "https://github.com/auraphp/Aura.Intl/contributors"
-            }
-        ],
-        "description": "The Aura Intl package provides internationalization tools, specifically message translation.",
-        "homepage": "https://github.com/auraphp/Aura.Intl",
-        "keywords": [
-            "g11n",
-            "globalization",
-            "i18n",
-            "internationalization",
-            "intl",
-            "l10n",
-            "localization"
-        ]
-    },
-    {
-        "name": "mobiledetect/mobiledetectlib",
-        "version": "2.8.26",
-        "version_normalized": "2.8.26.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/serbanghita/Mobile-Detect.git",
-            "reference": "a0ed86c9d7c04ae27fa6418b55e3beb04dfe3297"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/a0ed86c9d7c04ae27fa6418b55e3beb04dfe3297",
-            "reference": "a0ed86c9d7c04ae27fa6418b55e3beb04dfe3297",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.0.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "*"
-        },
-        "time": "2017-08-29T18:23:54+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "Mobile_Detect.php"
-            ],
-            "psr-0": {
-                "Detection": "namespaced/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
+                "name": "Neuman Vong",
+                "email": "neuman+pear@twilio.com",
+                "role": "Developer"
+            },
             {
-                "name": "Serban Ghita",
-                "email": "serbanghita@gmail.com",
-                "homepage": "http://mobiledetect.net",
+                "name": "Anant Narayanan",
+                "email": "anant@php.net",
                 "role": "Developer"
             }
         ],
-        "description": "Mobile_Detect is a lightweight PHP class for detecting mobile devices. It uses the User-Agent string combined with specific HTTP headers to detect the mobile environment.",
-        "homepage": "https://github.com/serbanghita/Mobile-Detect",
-        "keywords": [
-            "detect mobile devices",
-            "mobile",
-            "mobile detect",
-            "mobile detector",
-            "php mobile detect"
-        ]
+        "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+        "homepage": "https://github.com/firebase/php-jwt"
     },
     {
         "name": "psr/http-message",
@@ -194,6 +140,60 @@
             "psr-7",
             "request",
             "response"
+        ]
+    },
+    {
+        "name": "zendframework/zend-diactoros",
+        "version": "1.6.1",
+        "version_normalized": "1.6.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-diactoros.git",
+            "reference": "c8664b92a6d5bc229e48b0923486c097e45a7877"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/c8664b92a6d5bc229e48b0923486c097e45a7877",
+            "reference": "c8664b92a6d5bc229e48b0923486c097e45a7877",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.6 || ^7.0",
+            "psr/http-message": "^1.0"
+        },
+        "provide": {
+            "psr/http-message-implementation": "1.0"
+        },
+        "require-dev": {
+            "ext-dom": "*",
+            "ext-libxml": "*",
+            "phpunit/phpunit": "^5.7.16 || ^6.0.8",
+            "zendframework/zend-coding-standard": "~1.0"
+        },
+        "time": "2017-10-12T15:24:51+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.6-dev",
+                "dev-develop": "1.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\Diactoros\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "description": "PSR HTTP Message implementations",
+        "homepage": "https://github.com/zendframework/zend-diactoros",
+        "keywords": [
+            "http",
+            "psr",
+            "psr-7"
         ]
     },
     {
@@ -305,6 +305,192 @@
         ]
     },
     {
+        "name": "aura/intl",
+        "version": "3.0.0",
+        "version_normalized": "3.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/auraphp/Aura.Intl.git",
+            "reference": "7fce228980b19bf4dee2d7bbd6202a69b0dde926"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/auraphp/Aura.Intl/zipball/7fce228980b19bf4dee2d7bbd6202a69b0dde926",
+            "reference": "7fce228980b19bf4dee2d7bbd6202a69b0dde926",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.6|^7.0"
+        },
+        "time": "2017-01-20T05:00:11+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Aura\\Intl\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Aura.Intl Contributors",
+                "homepage": "https://github.com/auraphp/Aura.Intl/contributors"
+            }
+        ],
+        "description": "The Aura Intl package provides internationalization tools, specifically message translation.",
+        "homepage": "https://github.com/auraphp/Aura.Intl",
+        "keywords": [
+            "g11n",
+            "globalization",
+            "i18n",
+            "internationalization",
+            "intl",
+            "l10n",
+            "localization"
+        ]
+    },
+    {
+        "name": "cakephp/cakephp",
+        "version": "3.5.4",
+        "version_normalized": "3.5.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/cakephp/cakephp.git",
+            "reference": "eb609aff20945f8bc86cfb1fd3c50e6c62a502b0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/cakephp/cakephp/zipball/eb609aff20945f8bc86cfb1fd3c50e6c62a502b0",
+            "reference": "eb609aff20945f8bc86cfb1fd3c50e6c62a502b0",
+            "shasum": ""
+        },
+        "require": {
+            "aura/intl": "^3.0.0",
+            "cakephp/chronos": "^1.0.0",
+            "ext-intl": "*",
+            "ext-mbstring": "*",
+            "php": ">=5.6.0",
+            "psr/log": "^1.0.0",
+            "zendframework/zend-diactoros": "^1.4.0"
+        },
+        "conflict": {
+            "phpunit/phpunit": "<5.7"
+        },
+        "replace": {
+            "cakephp/cache": "self.version",
+            "cakephp/collection": "self.version",
+            "cakephp/core": "self.version",
+            "cakephp/database": "self.version",
+            "cakephp/datasource": "self.version",
+            "cakephp/event": "self.version",
+            "cakephp/filesystem": "self.version",
+            "cakephp/form": "self.version",
+            "cakephp/i18n": "self.version",
+            "cakephp/log": "self.version",
+            "cakephp/orm": "self.version",
+            "cakephp/utility": "self.version",
+            "cakephp/validation": "self.version"
+        },
+        "require-dev": {
+            "cakephp/cakephp-codesniffer": "^3.0",
+            "phpunit/phpunit": "^5.7|^6.0"
+        },
+        "suggest": {
+            "ext-openssl": "To use Security::encrypt() or have secure CSRF token generation.",
+            "lib-ICU": "The intl PHP library, to use Text::transliterate() or Text::slug()"
+        },
+        "time": "2017-10-16T02:25:27+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Cake\\": "src"
+            },
+            "files": [
+                "src/Core/functions.php",
+                "src/Collection/functions.php",
+                "src/I18n/functions.php",
+                "src/Utility/bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "CakePHP Community",
+                "homepage": "https://github.com/cakephp/cakephp/graphs/contributors"
+            }
+        ],
+        "description": "The CakePHP framework",
+        "homepage": "https://cakephp.org",
+        "keywords": [
+            "conventions over configuration",
+            "dry",
+            "form",
+            "framework",
+            "mvc",
+            "orm",
+            "psr-7",
+            "rapid-development",
+            "validation"
+        ]
+    },
+    {
+        "name": "admad/cakephp-jwt-auth",
+        "version": "2.2.0",
+        "version_normalized": "2.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ADmad/cakephp-jwt-auth.git",
+            "reference": "4607643c494b3d01dd4a1b98901cc86727f27192"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ADmad/cakephp-jwt-auth/zipball/4607643c494b3d01dd4a1b98901cc86727f27192",
+            "reference": "4607643c494b3d01dd4a1b98901cc86727f27192",
+            "shasum": ""
+        },
+        "require": {
+            "cakephp/cakephp": "^3.1",
+            "firebase/php-jwt": "^5.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "<6.0"
+        },
+        "time": "2017-08-01T13:11:03+00:00",
+        "type": "cakephp-plugin",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "ADmad\\JwtAuth\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "ADmad",
+                "homepage": "https://github.com/ADmad",
+                "role": "Author"
+            }
+        ],
+        "description": "CakePHP plugin for authenticating using JSON Web Tokens",
+        "homepage": "http://github.com/ADmad/cakephp-jwt-auth",
+        "keywords": [
+            "Authentication",
+            "authenticate",
+            "cakephp",
+            "jwt"
+        ]
+    },
+    {
         "name": "symfony/yaml",
         "version": "v3.3.10",
         "version_normalized": "3.3.10.0",
@@ -360,6 +546,67 @@
         ],
         "description": "Symfony Yaml Component",
         "homepage": "https://symfony.com"
+    },
+    {
+        "name": "symfony/polyfill-mbstring",
+        "version": "v1.6.0",
+        "version_normalized": "1.6.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-mbstring.git",
+            "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
+            "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "suggest": {
+            "ext-mbstring": "For best performance"
+        },
+        "time": "2017-10-11T12:05:26+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.6-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Mbstring\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill for the Mbstring extension",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "mbstring",
+            "polyfill",
+            "portable",
+            "shim"
+        ]
     },
     {
         "name": "symfony/debug",
@@ -841,82 +1088,35 @@
         ]
     },
     {
-        "name": "jakub-onderka/php-console-color",
-        "version": "0.1",
-        "version_normalized": "0.1.0.0",
+        "name": "mobiledetect/mobiledetectlib",
+        "version": "2.8.26",
+        "version_normalized": "2.8.26.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/JakubOnderka/PHP-Console-Color.git",
-            "reference": "e0b393dacf7703fc36a4efc3df1435485197e6c1"
+            "url": "https://github.com/serbanghita/Mobile-Detect.git",
+            "reference": "a0ed86c9d7c04ae27fa6418b55e3beb04dfe3297"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/JakubOnderka/PHP-Console-Color/zipball/e0b393dacf7703fc36a4efc3df1435485197e6c1",
-            "reference": "e0b393dacf7703fc36a4efc3df1435485197e6c1",
+            "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/a0ed86c9d7c04ae27fa6418b55e3beb04dfe3297",
+            "reference": "a0ed86c9d7c04ae27fa6418b55e3beb04dfe3297",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.2"
+            "php": ">=5.0.0"
         },
         "require-dev": {
-            "jakub-onderka/php-code-style": "1.0",
-            "jakub-onderka/php-parallel-lint": "0.*",
-            "jakub-onderka/php-var-dump-check": "0.*",
-            "phpunit/phpunit": "3.7.*",
-            "squizlabs/php_codesniffer": "1.*"
+            "phpunit/phpunit": "*"
         },
-        "time": "2014-04-08T15:00:19+00:00",
+        "time": "2017-08-29T18:23:54+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
+            "classmap": [
+                "Mobile_Detect.php"
+            ],
             "psr-0": {
-                "JakubOnderka\\PhpConsoleColor": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-2-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Jakub Onderka",
-                "email": "jakub.onderka@gmail.com",
-                "homepage": "http://www.acci.cz"
-            }
-        ]
-    },
-    {
-        "name": "jakub-onderka/php-console-highlighter",
-        "version": "v0.3.2",
-        "version_normalized": "0.3.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/JakubOnderka/PHP-Console-Highlighter.git",
-            "reference": "7daa75df45242c8d5b75a22c00a201e7954e4fb5"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/JakubOnderka/PHP-Console-Highlighter/zipball/7daa75df45242c8d5b75a22c00a201e7954e4fb5",
-            "reference": "7daa75df45242c8d5b75a22c00a201e7954e4fb5",
-            "shasum": ""
-        },
-        "require": {
-            "jakub-onderka/php-console-color": "~0.1",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "jakub-onderka/php-code-style": "~1.0",
-            "jakub-onderka/php-parallel-lint": "~0.5",
-            "jakub-onderka/php-var-dump-check": "~0.1",
-            "phpunit/phpunit": "~4.0",
-            "squizlabs/php_codesniffer": "~1.5"
-        },
-        "time": "2015-04-20T18:58:01+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "JakubOnderka\\PhpConsoleHighlighter": "src/"
+                "Detection": "namespaced/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -925,148 +1125,153 @@
         ],
         "authors": [
             {
-                "name": "Jakub Onderka",
-                "email": "acci@acci.cz",
-                "homepage": "http://www.acci.cz/"
+                "name": "Serban Ghita",
+                "email": "serbanghita@gmail.com",
+                "homepage": "http://mobiledetect.net",
+                "role": "Developer"
             }
+        ],
+        "description": "Mobile_Detect is a lightweight PHP class for detecting mobile devices. It uses the User-Agent string combined with specific HTTP headers to detect the mobile environment.",
+        "homepage": "https://github.com/serbanghita/Mobile-Detect",
+        "keywords": [
+            "detect mobile devices",
+            "mobile",
+            "mobile detect",
+            "mobile detector",
+            "php mobile detect"
         ]
     },
     {
-        "name": "dnoegel/php-xdg-base-dir",
-        "version": "0.1",
-        "version_normalized": "0.1.0.0",
+        "name": "cakephp/bake",
+        "version": "1.4.4",
+        "version_normalized": "1.4.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/dnoegel/php-xdg-base-dir.git",
-            "reference": "265b8593498b997dc2d31e75b89f053b5cc9621a"
+            "url": "https://github.com/cakephp/bake.git",
+            "reference": "1457d59df095db2d5aee2f280eb576970f932194"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/dnoegel/php-xdg-base-dir/zipball/265b8593498b997dc2d31e75b89f053b5cc9621a",
-            "reference": "265b8593498b997dc2d31e75b89f053b5cc9621a",
+            "url": "https://api.github.com/repos/cakephp/bake/zipball/1457d59df095db2d5aee2f280eb576970f932194",
+            "reference": "1457d59df095db2d5aee2f280eb576970f932194",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.2"
+            "cakephp/cakephp": ">=3.5.0,<4.0.0",
+            "cakephp/plugin-installer": "~1.0",
+            "php": ">=5.6.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "@stable"
+            "cakephp/cakephp-codesniffer": "^3.0",
+            "phpunit/phpunit": "~5.7 | ~6.0"
         },
-        "time": "2014-10-24T07:27:01+00:00",
-        "type": "project",
+        "time": "2017-10-14T20:01:15+00:00",
+        "type": "cakephp-plugin",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "XdgBaseDir\\": "src/"
+                "Bake\\": "src"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
             "MIT"
         ],
-        "description": "implementation of xdg base directory specification for php"
+        "authors": [
+            {
+                "name": "CakePHP Community",
+                "homepage": "https://github.com/cakephp/bake/graphs/contributors"
+            }
+        ],
+        "description": "Bake plugin for CakePHP 3",
+        "homepage": "https://github.com/cakephp/bake",
+        "keywords": [
+            "bake",
+            "cakephp"
+        ]
     },
     {
-        "name": "nikic/php-parser",
-        "version": "v3.1.1",
+        "name": "squizlabs/php_codesniffer",
+        "version": "3.1.1",
         "version_normalized": "3.1.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/nikic/PHP-Parser.git",
-            "reference": "a1e8e1a30e1352f118feff1a8481066ddc2f234a"
+            "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
+            "reference": "d667e245d5dcd4d7bf80f26f2c947d476b66213e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/a1e8e1a30e1352f118feff1a8481066ddc2f234a",
-            "reference": "a1e8e1a30e1352f118feff1a8481066ddc2f234a",
+            "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d667e245d5dcd4d7bf80f26f2c947d476b66213e",
+            "reference": "d667e245d5dcd4d7bf80f26f2c947d476b66213e",
             "shasum": ""
         },
         "require": {
+            "ext-simplexml": "*",
             "ext-tokenizer": "*",
-            "php": ">=5.5"
+            "ext-xmlwriter": "*",
+            "php": ">=5.4.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "~4.0|~5.0"
+            "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0"
         },
-        "time": "2017-09-02T17:10:46+00:00",
+        "time": "2017-10-16T22:40:25+00:00",
         "bin": [
-            "bin/php-parse"
+            "bin/phpcs",
+            "bin/phpcbf"
         ],
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.0-dev"
+                "dev-master": "3.x-dev"
             }
         },
         "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "PhpParser\\": "lib/PhpParser"
-            }
-        },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
             "BSD-3-Clause"
         ],
         "authors": [
             {
-                "name": "Nikita Popov"
+                "name": "Greg Sherwood",
+                "role": "lead"
             }
         ],
-        "description": "A PHP parser written in PHP",
+        "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
+        "homepage": "http://www.squizlabs.com/php-codesniffer",
         "keywords": [
-            "parser",
-            "php"
+            "phpcs",
+            "standards"
         ]
     },
     {
-        "name": "symfony/var-dumper",
-        "version": "v3.3.10",
-        "version_normalized": "3.3.10.0",
+        "name": "cakephp/cakephp-codesniffer",
+        "version": "3.0.1",
+        "version_normalized": "3.0.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/var-dumper.git",
-            "reference": "03e3693a36701f1c581dd24a6d6eea2eba2113f6"
+            "url": "https://github.com/cakephp/cakephp-codesniffer.git",
+            "reference": "2c7b5724d2221d509e4cb060952838d0612d0063"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/03e3693a36701f1c581dd24a6d6eea2eba2113f6",
-            "reference": "03e3693a36701f1c581dd24a6d6eea2eba2113f6",
+            "url": "https://api.github.com/repos/cakephp/cakephp-codesniffer/zipball/2c7b5724d2221d509e4cb060952838d0612d0063",
+            "reference": "2c7b5724d2221d509e4cb060952838d0612d0063",
             "shasum": ""
         },
         "require": {
-            "php": "^5.5.9|>=7.0.8",
-            "symfony/polyfill-mbstring": "~1.0"
-        },
-        "conflict": {
-            "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
+            "php": ">=5.4",
+            "squizlabs/php_codesniffer": "^3.0.0"
         },
         "require-dev": {
-            "ext-iconv": "*",
-            "twig/twig": "~1.34|~2.4"
+            "phpunit/phpunit": "<6.0"
         },
-        "suggest": {
-            "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
-            "ext-symfony_debug": ""
-        },
-        "time": "2017-10-02T06:42:24+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.3-dev"
-            }
-        },
+        "time": "2017-07-28T01:42:31+00:00",
+        "type": "phpcodesniffer-standard",
         "installation-source": "dist",
         "autoload": {
-            "files": [
-                "Resources/functions/dump.php"
-            ],
             "psr-4": {
-                "Symfony\\Component\\VarDumper\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
+                "CakePHP\\": "CakePHP"
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -1074,19 +1279,15 @@
         ],
         "authors": [
             {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
+                "name": "CakePHP Community",
+                "homepage": "https://github.com/cakephp/cakephp-codesniffer/graphs/contributors"
             }
         ],
-        "description": "Symfony mechanism for exploring and dumping PHP variables",
-        "homepage": "https://symfony.com",
+        "description": "CakePHP CodeSniffer Standards",
+        "homepage": "http://cakephp.org",
         "keywords": [
-            "debug",
-            "dump"
+            "codesniffer",
+            "framework"
         ]
     },
     {
@@ -1388,6 +1589,74 @@
             "hidden",
             "input",
             "prompt"
+        ]
+    },
+    {
+        "name": "justinrainbow/json-schema",
+        "version": "5.2.6",
+        "version_normalized": "5.2.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/justinrainbow/json-schema.git",
+            "reference": "d283e11b6e14c6f4664cf080415c4341293e5bbd"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/d283e11b6e14c6f4664cf080415c4341293e5bbd",
+            "reference": "d283e11b6e14c6f4664cf080415c4341293e5bbd",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "^2.1",
+            "json-schema/json-schema-test-suite": "1.2.0",
+            "phpunit/phpunit": "^4.8.22"
+        },
+        "time": "2017-10-21T13:15:38+00:00",
+        "bin": [
+            "bin/validate-json"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "JsonSchema\\": "src/JsonSchema/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Bruno Prieto Reis",
+                "email": "bruno.p.reis@gmail.com"
+            },
+            {
+                "name": "Justin Rainbow",
+                "email": "justin.rainbow@gmail.com"
+            },
+            {
+                "name": "Igor Wiedler",
+                "email": "igor@wiedler.ch"
+            },
+            {
+                "name": "Robert Schönthal",
+                "email": "seroscho@googlemail.com"
+            }
+        ],
+        "description": "A library to validate a json schema.",
+        "homepage": "https://github.com/justinrainbow/json-schema",
+        "keywords": [
+            "json",
+            "schema"
         ]
     },
     {
@@ -1720,87 +1989,97 @@
         ]
     },
     {
-        "name": "cakephp/cakephp-codesniffer",
-        "version": "3.0.1",
-        "version_normalized": "3.0.1.0",
+        "name": "jakub-onderka/php-console-color",
+        "version": "0.1",
+        "version_normalized": "0.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/cakephp/cakephp-codesniffer.git",
-            "reference": "2c7b5724d2221d509e4cb060952838d0612d0063"
+            "url": "https://github.com/JakubOnderka/PHP-Console-Color.git",
+            "reference": "e0b393dacf7703fc36a4efc3df1435485197e6c1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/cakephp/cakephp-codesniffer/zipball/2c7b5724d2221d509e4cb060952838d0612d0063",
-            "reference": "2c7b5724d2221d509e4cb060952838d0612d0063",
+            "url": "https://api.github.com/repos/JakubOnderka/PHP-Console-Color/zipball/e0b393dacf7703fc36a4efc3df1435485197e6c1",
+            "reference": "e0b393dacf7703fc36a4efc3df1435485197e6c1",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.4",
-            "squizlabs/php_codesniffer": "^3.0.0"
+            "php": ">=5.3.2"
         },
         "require-dev": {
-            "phpunit/phpunit": "<6.0"
+            "jakub-onderka/php-code-style": "1.0",
+            "jakub-onderka/php-parallel-lint": "0.*",
+            "jakub-onderka/php-var-dump-check": "0.*",
+            "phpunit/phpunit": "3.7.*",
+            "squizlabs/php_codesniffer": "1.*"
         },
-        "time": "2017-07-28T01:42:31+00:00",
-        "type": "phpcodesniffer-standard",
+        "time": "2014-04-08T15:00:19+00:00",
+        "type": "library",
         "installation-source": "dist",
         "autoload": {
-            "psr-4": {
-                "CakePHP\\": "CakePHP"
+            "psr-0": {
+                "JakubOnderka\\PhpConsoleColor": "src/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "MIT"
+            "BSD-2-Clause"
         ],
         "authors": [
             {
-                "name": "CakePHP Community",
-                "homepage": "https://github.com/cakephp/cakephp-codesniffer/graphs/contributors"
+                "name": "Jakub Onderka",
+                "email": "jakub.onderka@gmail.com",
+                "homepage": "http://www.acci.cz"
             }
-        ],
-        "description": "CakePHP CodeSniffer Standards",
-        "homepage": "http://cakephp.org",
-        "keywords": [
-            "codesniffer",
-            "framework"
         ]
     },
     {
-        "name": "symfony/polyfill-mbstring",
-        "version": "v1.6.0",
-        "version_normalized": "1.6.0.0",
+        "name": "symfony/var-dumper",
+        "version": "v3.3.10",
+        "version_normalized": "3.3.10.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296"
+            "url": "https://github.com/symfony/var-dumper.git",
+            "reference": "03e3693a36701f1c581dd24a6d6eea2eba2113f6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
-            "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
+            "url": "https://api.github.com/repos/symfony/var-dumper/zipball/03e3693a36701f1c581dd24a6d6eea2eba2113f6",
+            "reference": "03e3693a36701f1c581dd24a6d6eea2eba2113f6",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3"
+            "php": "^5.5.9|>=7.0.8",
+            "symfony/polyfill-mbstring": "~1.0"
+        },
+        "conflict": {
+            "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
+        },
+        "require-dev": {
+            "ext-iconv": "*",
+            "twig/twig": "~1.34|~2.4"
         },
         "suggest": {
-            "ext-mbstring": "For best performance"
+            "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
+            "ext-symfony_debug": ""
         },
-        "time": "2017-10-11T12:05:26+00:00",
+        "time": "2017-10-02T06:42:24+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.6-dev"
+                "dev-master": "3.3-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Mbstring\\": ""
-            },
             "files": [
-                "bootstrap.php"
+                "Resources/functions/dump.php"
+            ],
+            "psr-4": {
+                "Symfony\\Component\\VarDumper\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
             ]
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -1817,244 +2096,98 @@
                 "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Symfony polyfill for the Mbstring extension",
+        "description": "Symfony mechanism for exploring and dumping PHP variables",
         "homepage": "https://symfony.com",
         "keywords": [
-            "compatibility",
-            "mbstring",
-            "polyfill",
-            "portable",
-            "shim"
+            "debug",
+            "dump"
         ]
     },
     {
-        "name": "zendframework/zend-diactoros",
-        "version": "1.6.1",
-        "version_normalized": "1.6.1.0",
+        "name": "nikic/php-parser",
+        "version": "v3.1.1",
+        "version_normalized": "3.1.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/zendframework/zend-diactoros.git",
-            "reference": "c8664b92a6d5bc229e48b0923486c097e45a7877"
+            "url": "https://github.com/nikic/PHP-Parser.git",
+            "reference": "a1e8e1a30e1352f118feff1a8481066ddc2f234a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/c8664b92a6d5bc229e48b0923486c097e45a7877",
-            "reference": "c8664b92a6d5bc229e48b0923486c097e45a7877",
+            "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/a1e8e1a30e1352f118feff1a8481066ddc2f234a",
+            "reference": "a1e8e1a30e1352f118feff1a8481066ddc2f234a",
             "shasum": ""
         },
         "require": {
-            "php": "^5.6 || ^7.0",
-            "psr/http-message": "^1.0"
-        },
-        "provide": {
-            "psr/http-message-implementation": "1.0"
+            "ext-tokenizer": "*",
+            "php": ">=5.5"
         },
         "require-dev": {
-            "ext-dom": "*",
-            "ext-libxml": "*",
-            "phpunit/phpunit": "^5.7.16 || ^6.0.8",
-            "zendframework/zend-coding-standard": "~1.0"
+            "phpunit/phpunit": "~4.0|~5.0"
         },
-        "time": "2017-10-12T15:24:51+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.6-dev",
-                "dev-develop": "1.7-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Zend\\Diactoros\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-2-Clause"
-        ],
-        "description": "PSR HTTP Message implementations",
-        "homepage": "https://github.com/zendframework/zend-diactoros",
-        "keywords": [
-            "http",
-            "psr",
-            "psr-7"
-        ]
-    },
-    {
-        "name": "cakephp/cakephp",
-        "version": "3.5.4",
-        "version_normalized": "3.5.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/cakephp/cakephp.git",
-            "reference": "eb609aff20945f8bc86cfb1fd3c50e6c62a502b0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/cakephp/cakephp/zipball/eb609aff20945f8bc86cfb1fd3c50e6c62a502b0",
-            "reference": "eb609aff20945f8bc86cfb1fd3c50e6c62a502b0",
-            "shasum": ""
-        },
-        "require": {
-            "aura/intl": "^3.0.0",
-            "cakephp/chronos": "^1.0.0",
-            "ext-intl": "*",
-            "ext-mbstring": "*",
-            "php": ">=5.6.0",
-            "psr/log": "^1.0.0",
-            "zendframework/zend-diactoros": "^1.4.0"
-        },
-        "conflict": {
-            "phpunit/phpunit": "<5.7"
-        },
-        "replace": {
-            "cakephp/cache": "self.version",
-            "cakephp/collection": "self.version",
-            "cakephp/core": "self.version",
-            "cakephp/database": "self.version",
-            "cakephp/datasource": "self.version",
-            "cakephp/event": "self.version",
-            "cakephp/filesystem": "self.version",
-            "cakephp/form": "self.version",
-            "cakephp/i18n": "self.version",
-            "cakephp/log": "self.version",
-            "cakephp/orm": "self.version",
-            "cakephp/utility": "self.version",
-            "cakephp/validation": "self.version"
-        },
-        "require-dev": {
-            "cakephp/cakephp-codesniffer": "^3.0",
-            "phpunit/phpunit": "^5.7|^6.0"
-        },
-        "suggest": {
-            "ext-openssl": "To use Security::encrypt() or have secure CSRF token generation.",
-            "lib-ICU": "The intl PHP library, to use Text::transliterate() or Text::slug()"
-        },
-        "time": "2017-10-16T02:25:27+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Cake\\": "src"
-            },
-            "files": [
-                "src/Core/functions.php",
-                "src/Collection/functions.php",
-                "src/I18n/functions.php",
-                "src/Utility/bootstrap.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "CakePHP Community",
-                "homepage": "https://github.com/cakephp/cakephp/graphs/contributors"
-            }
-        ],
-        "description": "The CakePHP framework",
-        "homepage": "https://cakephp.org",
-        "keywords": [
-            "conventions over configuration",
-            "dry",
-            "form",
-            "framework",
-            "mvc",
-            "orm",
-            "psr-7",
-            "rapid-development",
-            "validation"
-        ]
-    },
-    {
-        "name": "cakephp/bake",
-        "version": "1.4.4",
-        "version_normalized": "1.4.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/cakephp/bake.git",
-            "reference": "1457d59df095db2d5aee2f280eb576970f932194"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/cakephp/bake/zipball/1457d59df095db2d5aee2f280eb576970f932194",
-            "reference": "1457d59df095db2d5aee2f280eb576970f932194",
-            "shasum": ""
-        },
-        "require": {
-            "cakephp/cakephp": ">=3.5.0,<4.0.0",
-            "cakephp/plugin-installer": "~1.0",
-            "php": ">=5.6.0"
-        },
-        "require-dev": {
-            "cakephp/cakephp-codesniffer": "^3.0",
-            "phpunit/phpunit": "~5.7 | ~6.0"
-        },
-        "time": "2017-10-14T20:01:15+00:00",
-        "type": "cakephp-plugin",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Bake\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "CakePHP Community",
-                "homepage": "https://github.com/cakephp/bake/graphs/contributors"
-            }
-        ],
-        "description": "Bake plugin for CakePHP 3",
-        "homepage": "https://github.com/cakephp/bake",
-        "keywords": [
-            "bake",
-            "cakephp"
-        ]
-    },
-    {
-        "name": "justinrainbow/json-schema",
-        "version": "5.2.6",
-        "version_normalized": "5.2.6.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/justinrainbow/json-schema.git",
-            "reference": "d283e11b6e14c6f4664cf080415c4341293e5bbd"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/d283e11b6e14c6f4664cf080415c4341293e5bbd",
-            "reference": "d283e11b6e14c6f4664cf080415c4341293e5bbd",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "friendsofphp/php-cs-fixer": "^2.1",
-            "json-schema/json-schema-test-suite": "1.2.0",
-            "phpunit/phpunit": "^4.8.22"
-        },
-        "time": "2017-10-21T13:15:38+00:00",
+        "time": "2017-09-02T17:10:46+00:00",
         "bin": [
-            "bin/validate-json"
+            "bin/php-parse"
         ],
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "5.0.x-dev"
+                "dev-master": "3.0-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "JsonSchema\\": "src/JsonSchema/"
+                "PhpParser\\": "lib/PhpParser"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Nikita Popov"
+            }
+        ],
+        "description": "A PHP parser written in PHP",
+        "keywords": [
+            "parser",
+            "php"
+        ]
+    },
+    {
+        "name": "jakub-onderka/php-console-highlighter",
+        "version": "v0.3.2",
+        "version_normalized": "0.3.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/JakubOnderka/PHP-Console-Highlighter.git",
+            "reference": "7daa75df45242c8d5b75a22c00a201e7954e4fb5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/JakubOnderka/PHP-Console-Highlighter/zipball/7daa75df45242c8d5b75a22c00a201e7954e4fb5",
+            "reference": "7daa75df45242c8d5b75a22c00a201e7954e4fb5",
+            "shasum": ""
+        },
+        "require": {
+            "jakub-onderka/php-console-color": "~0.1",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "jakub-onderka/php-code-style": "~1.0",
+            "jakub-onderka/php-parallel-lint": "~0.5",
+            "jakub-onderka/php-var-dump-check": "~0.1",
+            "phpunit/phpunit": "~4.0",
+            "squizlabs/php_codesniffer": "~1.5"
+        },
+        "time": "2015-04-20T18:58:01+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "JakubOnderka\\PhpConsoleHighlighter": "src/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -2063,28 +2196,46 @@
         ],
         "authors": [
             {
-                "name": "Bruno Prieto Reis",
-                "email": "bruno.p.reis@gmail.com"
-            },
-            {
-                "name": "Justin Rainbow",
-                "email": "justin.rainbow@gmail.com"
-            },
-            {
-                "name": "Igor Wiedler",
-                "email": "igor@wiedler.ch"
-            },
-            {
-                "name": "Robert Schönthal",
-                "email": "seroscho@googlemail.com"
+                "name": "Jakub Onderka",
+                "email": "acci@acci.cz",
+                "homepage": "http://www.acci.cz/"
             }
-        ],
-        "description": "A library to validate a json schema.",
-        "homepage": "https://github.com/justinrainbow/json-schema",
-        "keywords": [
-            "json",
-            "schema"
         ]
+    },
+    {
+        "name": "dnoegel/php-xdg-base-dir",
+        "version": "0.1",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dnoegel/php-xdg-base-dir.git",
+            "reference": "265b8593498b997dc2d31e75b89f053b5cc9621a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/dnoegel/php-xdg-base-dir/zipball/265b8593498b997dc2d31e75b89f053b5cc9621a",
+            "reference": "265b8593498b997dc2d31e75b89f053b5cc9621a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "@stable"
+        },
+        "time": "2014-10-24T07:27:01+00:00",
+        "type": "project",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "XdgBaseDir\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "implementation of xdg base directory specification for php"
     },
     {
         "name": "psy/psysh",
@@ -2159,157 +2310,6 @@
             "console",
             "interactive",
             "shell"
-        ]
-    },
-    {
-        "name": "squizlabs/php_codesniffer",
-        "version": "3.1.1",
-        "version_normalized": "3.1.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-            "reference": "d667e245d5dcd4d7bf80f26f2c947d476b66213e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d667e245d5dcd4d7bf80f26f2c947d476b66213e",
-            "reference": "d667e245d5dcd4d7bf80f26f2c947d476b66213e",
-            "shasum": ""
-        },
-        "require": {
-            "ext-simplexml": "*",
-            "ext-tokenizer": "*",
-            "ext-xmlwriter": "*",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0"
-        },
-        "time": "2017-10-16T22:40:25+00:00",
-        "bin": [
-            "bin/phpcs",
-            "bin/phpcbf"
-        ],
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Greg Sherwood",
-                "role": "lead"
-            }
-        ],
-        "description": "PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.",
-        "homepage": "http://www.squizlabs.com/php-codesniffer",
-        "keywords": [
-            "phpcs",
-            "standards"
-        ]
-    },
-    {
-        "name": "firebase/php-jwt",
-        "version": "v5.0.0",
-        "version_normalized": "5.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/firebase/php-jwt.git",
-            "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/firebase/php-jwt/zipball/9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
-            "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": " 4.8.35"
-        },
-        "time": "2017-06-27T22:17:23+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Firebase\\JWT\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Neuman Vong",
-                "email": "neuman+pear@twilio.com",
-                "role": "Developer"
-            },
-            {
-                "name": "Anant Narayanan",
-                "email": "anant@php.net",
-                "role": "Developer"
-            }
-        ],
-        "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
-        "homepage": "https://github.com/firebase/php-jwt"
-    },
-    {
-        "name": "admad/cakephp-jwt-auth",
-        "version": "2.2.0",
-        "version_normalized": "2.2.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/ADmad/cakephp-jwt-auth.git",
-            "reference": "4607643c494b3d01dd4a1b98901cc86727f27192"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/ADmad/cakephp-jwt-auth/zipball/4607643c494b3d01dd4a1b98901cc86727f27192",
-            "reference": "4607643c494b3d01dd4a1b98901cc86727f27192",
-            "shasum": ""
-        },
-        "require": {
-            "cakephp/cakephp": "^3.1",
-            "firebase/php-jwt": "^5.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "<6.0"
-        },
-        "time": "2017-08-01T13:11:03+00:00",
-        "type": "cakephp-plugin",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "ADmad\\JwtAuth\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "ADmad",
-                "homepage": "https://github.com/ADmad",
-                "role": "Author"
-            }
-        ],
-        "description": "CakePHP plugin for authenticating using JSON Web Tokens",
-        "homepage": "http://github.com/ADmad/cakephp-jwt-auth",
-        "keywords": [
-            "Authentication",
-            "authenticate",
-            "cakephp",
-            "jwt"
         ]
     }
 ]

@@ -20,6 +20,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
@@ -47,6 +48,7 @@ public class settings extends AppCompatActivity implements View.OnClickListener 
     String input_pass;
     public static final String MyPREFERENCES = "MyPrefs" ;
     String jsonObject;
+    String code;
     private static final String local = "http://10.42.0.1:8765/api/";
 
 
@@ -111,6 +113,8 @@ public class settings extends AppCompatActivity implements View.OnClickListener 
 
                                 try{
                                     jsonObject = getJSONObjectFromURL(local+"updatePassword",nameValuePairs);
+                                    JSONObject jsonn = new JSONObject(jsonObject);
+                                    code = jsonn.getString("code");
                                     Log.e("TAG", "onClick: " + jsonObject );
 
 
@@ -124,15 +128,22 @@ public class settings extends AppCompatActivity implements View.OnClickListener 
                         thread.start();
                         try {
                             thread.join();
+                            if(code.equals("0"))
+                            {
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("pass" , newpass1);
+                                Intent settings_main = new Intent(settings.this,MainActivity.class);
+                                settings_main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                settings_main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(settings_main);
+                                finish();
+                                Toast.makeText(this, "Password changed", Toast.LENGTH_SHORT).show();
 
-                            SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("pass" , newpass1);
-                            Intent settings_main = new Intent(settings.this,MainActivity.class);
-                            settings_main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            settings_main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(settings_main);
-                            finish();
-                            Toast.makeText(this, "Password changed", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                            }
 
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -152,7 +163,7 @@ public class settings extends AppCompatActivity implements View.OnClickListener 
         HttpURLConnection urlConnection = null;
 
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost(urlString);
+        HttpPut request = new HttpPut(urlString);
 
         // add request header
         //String msg = json.toString();
