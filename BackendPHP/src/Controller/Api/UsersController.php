@@ -82,7 +82,8 @@ class UsersController extends AppController {
                     'token' => JWT::encode([
                         'sub' => $user['id']
                     ],
-                        Security::salt())
+                        Security::salt()),
+                    'user' => $user
                 ]
             ]);
         } else {
