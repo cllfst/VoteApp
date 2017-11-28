@@ -52,7 +52,11 @@ response (json) : Registered Successfully
     "code": 0,
     "data": {
         "message": "Registered Successfully",
-        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZjZjZjY3My01ZDkzLTQ1ZDgtYjJkYy04YmM3ZTU4NDJkN2MifQ.wQ8g92cYzUlku5hclKDT-eeMO3OpDxXZ8Dxs8n_RSTE"
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciO",
+        "id": "af6cf673-5d93-45d8-b2dc-8bc7e5842d7c",
+                    "first_name": "aymen",
+                    "last_name": "chebbi",
+                    "email": "aymen.chebi@gmail.com"
     }
 }
 ```
