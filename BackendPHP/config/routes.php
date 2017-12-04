@@ -18,6 +18,7 @@ Router::prefix('api',function ($routes){
 
     Router::connect('/api/getPollsList', ['controller' => 'Polls', 'action' => 'getPollsList', 'prefix' => 'api']);
     Router::connect('/api/getPollQuestions/:id', ['controller' => 'Polls', 'action' => 'getPollQuestions', 'prefix' => 'api']);
+    Router::connect('/api/toggleOpenPoll/:id', ['controller' => 'Polls', 'action' => 'toggleOpen', 'prefix' => 'api']);
     Router::connect('/api/getQuestionChoices/:id', ['controller' => 'Questions', 'action' => 'getQuestionChoices', 'prefix' => 'api']);
 
     Router::connect('/api/vote/',['controller' => 'OfferedAnswers', 'action' => 'vote', 'prefix' => 'api']);

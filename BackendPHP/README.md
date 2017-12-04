@@ -75,7 +75,7 @@ response (json) : Can't register the user
 {
     "code": -2,
     "data": {
-        "message": "Can\'t register the user"
+        "message": "Cannot register the user"
     }
 }
 ```
@@ -213,7 +213,36 @@ response : 200 (json)
     }
 }
 ```
+`POST` /api/toggleOpenPoll/:pollId : Change Poll `is_open` attribute
 
+body request (json) : `is_open` takes 0 or 1 as value
+```json
+{
+	"is_open":"0"
+	
+}
+```
+
+response (json) : Poll updated successfully"
+````json
+{
+    "code": 0,
+    "data": {
+        "message": "Poll updated successfully",
+        "Poll State": false
+    }
+}
+````
+response (json) : Poll update failed"
+````json
+{
+    "code": -1,
+    "data": {
+        "message": "Poll updated failed",
+        "Poll State": false
+    }
+}
+````
 
 `GET` /api/getQuestionChoices/{question_id} : return a list of offered answers for the provided question
 response : 200 (json)
